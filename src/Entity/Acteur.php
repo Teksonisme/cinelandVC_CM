@@ -35,13 +35,13 @@ class Acteur
     private $nationalite;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Film::class, inversedBy="acteurs")
+     * @ORM\ManyToMany(targetEntity=film::class)
      */
-    private $film;
+    private $films;
 
     public function __construct()
     {
-        $this->film = new ArrayCollection();
+        $this->films = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -86,26 +86,27 @@ class Acteur
     }
 
     /**
-     * @return Collection|Film[]
+     * @return Collection|film[]
      */
-    public function getFilm(): Collection
+    public function getFilms(): Collection
     {
-        return $this->film;
+        return $this->films;
     }
 
-    public function addFilm(Film $film): self
+    public function addFilm(film $film): self
     {
-        if (!$this->film->contains($film)) {
-            $this->film[] = $film;
+        if (!$this->films->contains($film)) {
+            $this->films[] = $film;
         }
 
         return $this;
     }
 
-    public function removeFilm(Film $film): self
+    public function removeFilm(film $film): self
     {
-        $this->film->removeElement($film);
+        $this->films->removeElement($film);
 
         return $this;
     }
+
 }

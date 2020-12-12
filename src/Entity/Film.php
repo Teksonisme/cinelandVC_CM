@@ -45,15 +45,16 @@ class Film
     private $ageMinimal;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Acteur::class, mappedBy="film")
+     * @ORM\ManyToMany(targetEntity=Acteur::class, inversedBy="eaz")
      */
     private $acteurs;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="films")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=genre::class, inversedBy="films", cascade="persist")
      */
     private $genre;
+
+
 
     public function __construct()
     {
@@ -137,7 +138,6 @@ class Film
     {
         if (!$this->acteurs->contains($acteur)) {
             $this->acteurs[] = $acteur;
-            $acteur->addFilm($this);
         }
 
         return $this;
@@ -145,19 +145,17 @@ class Film
 
     public function removeActeur(Acteur $acteur): self
     {
-        if ($this->acteurs->removeElement($acteur)) {
-            $acteur->removeFilm($this);
-        }
+        $this->acteurs->removeElement($acteur);
 
         return $this;
     }
 
-    public function getGenre(): ?Genre
+    public function getGenre(): ?genre
     {
         return $this->genre;
     }
 
-    public function setGenre(?Genre $genre): self
+    public function setGenre(?genre $genre): self
     {
         $this->genre = $genre;
 

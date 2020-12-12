@@ -24,6 +24,11 @@ class Genre
      */
     private $nom;
 
+    /**
+     * @ORM\OneToMany(targetEntity=film::class, mappedBy="genre", cascade="persist")
+     */
+    private $films;
+
 
     public function __construct()
     {
@@ -48,14 +53,14 @@ class Genre
     }
 
     /**
-     * @return Collection|Film[]
+     * @return Collection|film[]
      */
     public function getFilms(): Collection
     {
         return $this->films;
     }
 
-    public function addFilm(Film $film): self
+    public function addFilm(film $film): self
     {
         if (!$this->films->contains($film)) {
             $this->films[] = $film;
@@ -65,7 +70,7 @@ class Genre
         return $this;
     }
 
-    public function removeFilm(Film $film): self
+    public function removeFilm(film $film): self
     {
         if ($this->films->removeElement($film)) {
             // set the owning side to null (unless already changed)
@@ -76,4 +81,5 @@ class Genre
 
         return $this;
     }
+
 }
