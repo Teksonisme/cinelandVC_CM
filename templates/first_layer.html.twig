@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="UTF-8"></head>
+	<body>
+		<div id="navigation"></div>
+		<h1>
+			{% block titre %}
+				Cineland
+			{% endblock %}
+		</h1>
+		<div id="contenu"> {% block contenu %}{% endblock %}
+			</div>
+			<hr/>
+			<div id="pied_de_page">
+			</div>
+		</body>
+	</html>
