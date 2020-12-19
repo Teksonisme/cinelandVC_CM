@@ -1,0 +1,22 @@
+{% extends "first_layer.html.twig" %}
+{% block titre %}
+	{{ parent() }}
+{% endblock %}
+{% block contenu %}
+
+	<p>{{titre}}
+	</p>
+	<p>{{duree}}
+	</p>
+	<p>{{dateSortie}}
+	</p>
+	<p>{{note}}
+	</p>
+	<p>{{ageMinimal}}
+	</p>
+
+	<a href="{{ path('modifier_film', { 'id': film.id }) }}">
+		Modifier</a>
+	<a href="{{ path('supprimer_film', { 'id': film.id }) }}">
+		Supprimer</a>
+{% endblock %}

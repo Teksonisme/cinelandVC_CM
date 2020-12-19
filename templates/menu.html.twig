@@ -3,5 +3,16 @@
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
-	
+	<p>
+		<a href="{{ path('liste_acteur') }}">
+			Liste des acteurs</a>
+	</p>
+	<p>
+		<a href="{{ path('liste_genre') }}">
+			Liste des genres</a>
+	</p>
+	<p>
+		<a href="{{ path('liste_film') }}">
+			Liste des films</a>
+	</p>
 {% endblock %}

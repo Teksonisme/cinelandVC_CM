@@ -4,11 +4,11 @@
 {% endblock %}
 {% block contenu %}
 	<div id="list">
-		{% for acteur in acteurs %}
+		{% for film in films %}
 			<p>
-				<a href="{{ path('detail_acteur', 
-                { 'id': acteur.id }) }}">
-                {{acteur.nomPrenom}}</a>
+				<a href="{{ path('detail_film', 
+                { 'id': film.id }) }}">
+                {{film.titre}}</a>
 			</p>
 		{% endfor %}
 	</div>

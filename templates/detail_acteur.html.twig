@@ -6,7 +6,7 @@
 
 	<p>{{nomPrenom}}
 	</p>
-    <p>{{date_naissance}}
+	<p>{{date_naissance}}
 	</p>
 	<p>{{nationalite}}
 	</p>
@@ -14,4 +14,8 @@
 	{% for film in films %}
 		<p>{{film.nom}}</p>
 	{% endfor %}
+	<a href="{{ path('modifier_acteur', { 'id': acteur.id }) }}">
+		Modifier</a>
+	<a href="{{ path('supprimer_acteur', { 'id': acteur.id }) }}">
+		Supprimer</a>
 {% endblock %}

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<meta charset="UTF-8">
-	<link href="{{ asset('css/css_file.css') }}" rel='stylesheet' />
+		<meta charset="UTF-8">
+		<link href="{{ asset('css/css_file.css') }}" rel='stylesheet'/>
 	</head>
 	<body>
 		<div id="navigation"></div>
@@ -14,7 +14,7 @@
 		<div id="contenu"> {% block contenu %}{% endblock %}
 			</div>
 			<hr/>
-			<div id="pied_de_page">
-			</div>
-		</body>
-	</html>
+			<div id="pied_de_page"></div>
+			<a href="{{ path('menu')}}">Menu</a>
+	</body>
+</html>

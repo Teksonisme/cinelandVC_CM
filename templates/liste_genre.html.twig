@@ -3,14 +3,14 @@
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
-	<div class="first">
+	<div id="">
 		{% for genre in genres %}
 			<p>
 				{{genre.nom}}
 			</p>
 		{% endfor %}
 	</div>
-	<div class="second">
+	<div id="">
 		{{ form(formulaire) }}
 		</div>
 	{% endblock %}
