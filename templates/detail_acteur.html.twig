@@ -1,0 +1,17 @@
+{% extends "first_layer.html.twig" %}
+{% block titre %}
+	{{ parent() }}
+{% endblock %}
+{% block contenu %}
+
+	<p>{{nomPrenom}}
+	</p>
+    <p>{{date_naissance}}
+	</p>
+	<p>{{nationalite}}
+	</p>
+
+	{% for film in films %}
+		<p>{{film.nom}}</p>
+	{% endfor %}
+{% endblock %}

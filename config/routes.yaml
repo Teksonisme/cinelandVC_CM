@@ -5,98 +5,101 @@ menu:
      path: /menu
      controller: App\Controller\FilmController::menu
 liste_genre:
-     path: /liste_genre
+     path: /liste-genre
      controller: App\Controller\FilmController::listeGenre
 ajouter_genre:
-     path: /ajouter_genre
+     path: /ajouter-genre
      controller: App\Controller\FilmController::ajouterGenre
 liste_acteur:
-     path: /liste_acteur
+     path: /liste-acteur
      controller: App\Controller\FilmController::listeActeur
+detail_acteur:
+     path: /detail-acteur/{id}
+     controller: App\Controller\FilmController::detailActeur
 ajouter_acteur:
-     path: /ajouter_acteur
+     path: /ajouter-acteur
      controller: App\Controller\FilmController::ajouterActeur
 modifier_acteur:
-     path: /modifier_acteur
+     path: /modifier-acteur
      controller: App\Controller\FilmController::modifierActeur
 supprimer_acteur:
-     path: /supprimer_acteur
+     path: /supprimer-acteur
      controller: App\Controller\FilmController::supprimerActeur
 liste_film:
-     path: /liste_film
+     path: /liste-film
      controller: App\Controller\FilmController::listeFilm
 detail_film:
-     path: /detail_film
+     path: /detail-film
      controller: App\Controller\FilmController::detailFilm
 ajouter_film:
-     path: /ajouter_film
+     path: /ajouter-film
      controller: App\Controller\FilmController::ajouterFilm
 supprimer_film:
-     path: /supprimer_film
+     path: /supprimer-film
      controller: App\Controller\FilmController::supprimerFilm
 liste_entre_deux_an:
-     path: /list_film2an/{annee1}.{annee2}
+     path: /list-film2an/{annee1}.{annee2}
      controller: App\Controller\FilmController::listFilm2An
      requirements: 
         annee1: \d+
         annee2: \d+
 liste_avant_date:
-     path: /liste_filmb4date/{date}
+     path: /liste-filmb4date/{date}
      controller: App\Controller\FilmController::listeFilmB4Date
     #  requirements:
     #     date: ^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$
 liste_film_acteur: #On donne ici le film pour trouver tous les acteurs
-     path: /liste_film/{id}
+     path: /liste-film/{id}
      controller: App\Controller\FilmController::listeFilmActeur
      requirements: 
         id: \d+
 liste_acteur_3film:
-     path: /liste_acteur_3film/
+     path: /liste-acteur-3film/
      controller: App\Controller\FilmController::listeActeur3Film
 liste_film_2acteur:
-     path: /liste_film/{id}-{id2}
+     path: /liste-film/{id}-{id2}
      controller: App\Controller\FilmController::listeFilm2Acteur
      requirements: 
         id: \d+
         id2: \d+
 liste_acteur_genre_2film:
-     path: /liste_film/{id}
+     path: /liste-film/{id}
      controller: App\Controller\FilmController::listeActeurGenre2Film
      requirements: 
         id: \d+
 liste_film_duree_acteur: #On donne ici l'acteur pour trouver la durée de ses films
-     path: /liste_duree_film/{id}
+     path: /liste-duree-film/{id}
      controller: App\Controller\FilmController::listeDureeFilm
      requirements: 
         id: \d+
 liste_film_acteur_chronologique:
-     path: /liste_film_chronologique/
+     path: /liste-film-chronologique/
      controller: App\Controller\FilmController::listeFilmChronologique
 liste_duree_moyenne_film_genre:
-     path: /list_duree_moyenne/{id}
+     path: /list-duree-moyenne/{id}
      controller: App\Controller\FilmController::listFilmDureeMoyenne1Genre
      requirements: 
         id: \d+
 augmenter_note_film:
-     path: /augmenter_note_film/{note}
+     path: /augmenter-note-film/{note}
      controller: App\Controller\FilmController::augmenterNoteFilm
      requirements: 
         note: \d+
 supprimer_genre_sans_film:
-     path: /supprimer_genre_sans_film/{id}
+     path: /supprimer-genre-sans-film/{id}
      controller: App\Controller\FilmController::supprimerGenreSansFilm
      requirements: 
         id: \d+
 recherche_film_partie_titre:
-     path: /rechercher_film_partie_titre/{partie}
+     path: /rechercher-film-partie-titre/{partie}
      controller: App\Controller\FilmController::rechercheFilmPartieTitre
 augmenter_age_minimal_1acteur:
-     path: /ajouter_age_minimal/{id}
+     path: /ajouter-age-minimal/{id}
      controller: App\Controller\FilmController::ajouterAgeMini
      requirements: 
         id: \d+
 augmenter_age_minimal_1acteur_choisi:
-     path: /ajouter_age_minimal/{id}-{nombre}
+     path: /ajouter-age-minimal/{id}-{nombre}
      controller: App\Controller\FilmController::ajouterAgeMiniChoisi
      requirements: 
         id: \d+

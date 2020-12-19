@@ -25,7 +25,7 @@ class Genre
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=film::class, mappedBy="genre", cascade="persist")
+     * @ORM\OneToMany(targetEntity=Film::class, mappedBy="genre", cascade="persist")
      */
     private $films;
 

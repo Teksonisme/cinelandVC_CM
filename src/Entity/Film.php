@@ -45,12 +45,12 @@ class Film
     private $ageMinimal;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Acteur::class, inversedBy="eaz")
+     * @ORM\ManyToMany(targetEntity=Acteur::class, inversedBy="films", cascade="persist")
      */
     private $acteurs;
 
     /**
-     * @ORM\ManyToOne(targetEntity=genre::class, inversedBy="films", cascade="persist")
+     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="films", cascade="persist")
      */
     private $genre;
 

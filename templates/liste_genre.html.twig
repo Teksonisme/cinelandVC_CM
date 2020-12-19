@@ -1,0 +1,16 @@
+{% extends "first_layer.html.twig" %}
+{% block titre %}
+	{{ parent() }}
+{% endblock %}
+{% block contenu %}
+	<div class="first">
+		{% for genre in genres %}
+			<p>
+				{{genre.nom}}
+			</p>
+		{% endfor %}
+	</div>
+	<div class="second">
+		{{ form(formulaire) }}
+		</div>
+	{% endblock %}
