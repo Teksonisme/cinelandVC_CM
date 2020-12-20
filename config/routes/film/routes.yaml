@@ -1,0 +1,58 @@
+# index:
+#     path: /
+#     controller: App\Controller\FilmController::accueil
+
+liste_film:
+     path: /liste-film
+     controller: App\Controller\FilmController::listeFilm
+detail_film:
+     path: /detail-film/{id}
+     controller: App\Controller\FilmController::detailFilm
+     requirements:
+          id: \d+
+modifier_film:
+     path: /modifier-film/{id}
+     controller: App\Controller\FilmController::modifierFilm
+     requirements:
+          id: \d+
+modifier2_film: 
+     path: /modifier2-film/{id}
+     controller: App\Controller\FilmController::modifierFilm
+     requirements:
+          id: \d+ 
+ajouter_film:
+     path: /ajouter-film
+     controller: App\Controller\FilmController::ajouterFilm
+supprimer_film:
+     path: /supprimer-film
+     controller: App\Controller\FilmController::supprimerFilm
+liste_entre_deux_an:
+     path: /list-film2an/{annee1}.{annee2}
+     controller: App\Controller\FilmController::listFilm2An
+     requirements: 
+        annee1: \d+
+        annee2: \d+
+liste_avant_date:
+     path: /liste-filmb4date/{date}
+     controller: App\Controller\FilmController::listeFilmB4Date
+    #  requirements:
+    #     date: ^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$
+liste_film_acteur: #On donne ici le film pour trouver tous les acteurs
+     path: /liste-film/{id}
+     controller: App\Controller\FilmController::listeFilmActeur
+     requirements: 
+        id: \d+
+liste_acteur_3film:
+     path: /liste-acteur-3film/
+     controller: App\Controller\FilmController::listeActeur3Film
+liste_film_acteur_chronologique:
+     path: /liste-film-chronologique/
+     controller: App\Controller\FilmController::listeFilmChronologique
+augmenter_note_film:
+     path: /augmenter-note-film/{note}
+     controller: App\Controller\FilmController::augmenterNoteFilm
+     requirements: 
+        note: \d+
+recherche_film_partie_titre:
+     path: /rechercher-film-partie-titre/{partie}
+     controller: App\Controller\FilmController::rechercheFilmPartieTitre

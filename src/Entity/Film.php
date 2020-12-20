@@ -6,6 +6,7 @@ use App\Repository\FilmRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=FilmRepository::class)
@@ -20,7 +21,7 @@ class Film
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=60)
+     * @ORM\Column(type="string", length=60, unique=true)
      */
     private $titre;
 
@@ -30,7 +31,9 @@ class Film
     private $duree;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\Regex(pattern="/^([0-2]?[0-9]|3[01])\/([0][1-9]|[1][0-2])\/(19[0-9]{2}|20[01][0-9])$/",
+     *  message="Format de date : jj/mm/aaaa")
      */
     private $dateSortie;
 
@@ -90,12 +93,12 @@ class Film
         return $this;
     }
 
-    public function getDateSortie(): ?\DateTimeInterface
+    public function getDateSortie(): ?string
     {
         return $this->dateSortie;
     }
 
-    public function setDateSortie(\DateTimeInterface $dateSortie): self
+    public function setDateSortie(string $dateSortie): self
     {
         $this->dateSortie = $dateSortie;
 

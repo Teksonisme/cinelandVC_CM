@@ -15,4 +15,12 @@
 		<a href="{{ path('liste_film') }}">
 			Liste des films</a>
 	</p>
+
+	<p>
+		<ul>
+			{% for mesg in app.session.flashbag.get('pageNotFound') %}
+				<li>{{ mesg }}</li>
+			{% endfor %}
+		</ul>
+	</p>
 {% endblock %}

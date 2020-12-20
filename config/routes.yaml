@@ -1,111 +1,20 @@
-#index:
-#    path: /
-#    controller: App\Controller\CinelandController::index
+# index:
+#     path: /
+#     controller: App\Controller\CinelandController::accueil
 menu:
      path: /menu
      controller: App\Controller\CinelandController::menu
-liste_genre:
-     path: /liste-genre
-     controller: App\Controller\CinelandController::listeGenre
-liste_acteur:
-     path: /liste-acteur
-     controller: App\Controller\CinelandController::listeActeur
-detail_acteur:
-     path: /detail-acteur/{id}
-     controller: App\Controller\CinelandController::detailActeur
-     requirements:
-          id: \d+
-modifier_acteur:
-     path: /modifier-acteur/{id}
-     controller: App\Controller\CinelandController::modifierActeur
-     requirements:
-          id: \d+
-modifier2_acteur: 
-     path: /modifier2-acteur/{id}
-     controller: App\Controller\CinelandController::modifier2Acteur
-     requirements:
-          id: \d+         
-supprimer_acteur:
-     path: /supprimer-acteur/{id}
-     controller: App\Controller\CinelandController::supprimerActeur
-     requirements:
-          id: \d+ 
-liste_film:
-     path: /liste-film
-     controller: App\Controller\CinelandController::listeFilm
-detail_film:
-     path: /detail-film
-     controller: App\Controller\CinelandController::detailFilm
-ajouter_film:
-     path: /ajouter-film
-     controller: App\Controller\CinelandController::ajouterFilm
-supprimer_film:
-     path: /supprimer-film
-     controller: App\Controller\CinelandController::supprimerFilm
-liste_entre_deux_an:
-     path: /list-film2an/{annee1}.{annee2}
-     controller: App\Controller\CinelandController::listFilm2An
-     requirements: 
-        annee1: \d+
-        annee2: \d+
-liste_avant_date:
-     path: /liste-filmb4date/{date}
-     controller: App\Controller\CinelandController::listeFilmB4Date
-    #  requirements:
-    #     date: ^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$
-liste_film_acteur: #On donne ici le film pour trouver tous les acteurs
-     path: /liste-film/{id}
-     controller: App\Controller\CinelandController::listeFilmActeur
-     requirements: 
-        id: \d+
-liste_acteur_3film:
-     path: /liste-acteur-3film/
-     controller: App\Controller\CinelandController::listeActeur3Film
-liste_film_2acteur:
-     path: /liste-film/{id}-{id2}
-     controller: App\Controller\CinelandController::listeFilm2Acteur
-     requirements: 
-        id: \d+
-        id2: \d+
-liste_acteur_genre_2film:
-     path: /liste-film/{id}
-     controller: App\Controller\CinelandController::listeActeurGenre2Film
-     requirements: 
-        id: \d+
-liste_film_duree_acteur: #On donne ici l'acteur pour trouver la durée de ses films
-     path: /liste-duree-film/{id}
-     controller: App\Controller\CinelandController::listeDureeFilm
-     requirements: 
-        id: \d+
-liste_film_acteur_chronologique:
-     path: /liste-film-chronologique/
-     controller: App\Controller\CinelandController::listeFilmChronologique
-liste_duree_moyenne_film_genre:
-     path: /list-duree-moyenne/{id}
-     controller: App\Controller\CinelandController::listFilmDureeMoyenne1Genre
-     requirements: 
-        id: \d+
-augmenter_note_film:
-     path: /augmenter-note-film/{note}
-     controller: App\Controller\CinelandController::augmenterNoteFilm
-     requirements: 
-        note: \d+
-supprimer_genre_sans_film:
-     path: /supprimer-genre-sans-film/{id}
-     controller: App\Controller\CinelandController::supprimerGenreSansFilm
-     requirements: 
-        id: \d+
-recherche_film_partie_titre:
-     path: /rechercher-film-partie-titre/{partie}
-     controller: App\Controller\CinelandController::rechercheFilmPartieTitre
-augmenter_age_minimal_1acteur:
-     path: /ajouter-age-minimal/{id}
-     controller: App\Controller\CinelandController::ajouterAgeMini
-     requirements: 
-        id: \d+
-augmenter_age_minimal_1acteur_choisi:
-     path: /ajouter-age-minimal/{id}-{nombre}
-     controller: App\Controller\CinelandController::ajouterAgeMiniChoisi
-     requirements: 
-        id: \d+
-        nombre: \d+
+acteur: 
+    resource: routes/acteur/routes.yaml
+    prefix: /acteur
+film: 
+    resource: routes/film/routes.yaml
+    prefix: /film
+genre: 
+    resource: routes/genre/routes.yaml
+    prefix: /genre
+pageNotFound:
+    path:  /{pathing}
+    controller: App\Controller\CinelandController::pageNotFound
+    requirements:
+        pathing: .*

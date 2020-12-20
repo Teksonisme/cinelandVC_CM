@@ -4,15 +4,15 @@
 {% endblock %}
 {% block contenu %}
 
-	<p>{{titre}}
+	<p>Titre : {{titre}}
 	</p>
-	<p>{{duree}}
+	<p>Durée : {{duree}} minute(s)
 	</p>
-	<p>{{dateSortie}}
+	<p>Date de sortie : {{dateSortie}}
 	</p>
-	<p>{{note}}
+	<p>Note : {{note}}/20
 	</p>
-	<p>{{ageMinimal}}
+	<p>PEGI : {{ageMinimal}}
 	</p>
 
 	<a href="{{ path('modifier_film', { 'id': film.id }) }}">

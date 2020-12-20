@@ -1,0 +1,19 @@
+# index:
+#     path: /
+#     controller: App\Controller\GenreController::accueil
+redirect:
+     path: /
+     controller: App\Controller\CinelandController::redirect
+liste_genre:
+     path: /liste
+     controller: App\Controller\GenreController::listeGenre
+supprimer_genre_sans_film:
+     path: /supprimer-genre-sans-film/{id}
+     controller: App\Controller\GenreController::supprimerGenreSansFilm
+     requirements: 
+        id: \d+
+augmenter_duree_moyenne_film_genre:
+     path: /add-duree-en-fonction-genre/{id}
+     controller: App\Controller\GenreController::listFilmDureeMoyenne1Genre
+     requirements: 
+        id: \d+
