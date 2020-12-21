@@ -6,13 +6,13 @@
 	<div id="list">
 		{% for film in films %}
 			<p>
-				<a href="{{ path('detail_film', 
-                { 'id': film.id }) }}">
-                {{film.titre}}</a>
+				<a href="{{ path('detail_film', { 'id': film.id }) }}">
+					{{film.titre}}</a>
 			</p>
 		{% endfor %}
 	</div>
 	<div id="form">
 		{{ form(formulaire) }}
-	</div>
-	{% endblock %}
+		</div>
+
+{% endblock %}

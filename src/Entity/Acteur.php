@@ -26,9 +26,7 @@ class Acteur
     private $nomPrenom;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     * @Assert\Regex(pattern="/^([0-2]?[0-9]|3[01])\/([0][1-9]|[1][0-2])\/(19[0-9]{2}|20[01][0-9])$/",
-     *  message="Format de date : jj/mm/aaaa")
+     * @ORM\Column(type="date")
      */
     private $dateNaissance;
 
@@ -65,18 +63,6 @@ class Acteur
         return $this;
     }
 
-    public function getDateNaissance(): ?string
-    {
-        return $this->dateNaissance;
-    }
-
-    public function setDateNaissance(?string $dateNaissance): self
-    {
-        $this->dateNaissance = $dateNaissance;
-
-        return $this;
-    }
-
     public function getNationalite(): ?string
     {
         return $this->nationalite;
@@ -109,6 +95,18 @@ class Acteur
     public function removeFilm(film $film): self
     {
         $this->films->removeElement($film);
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
 
         return $this;
     }

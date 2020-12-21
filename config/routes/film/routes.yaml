@@ -24,14 +24,14 @@ ajouter_film:
      path: /ajouter-film
      controller: App\Controller\FilmController::ajouterFilm
 supprimer_film:
-     path: /supprimer-film
+     path: /supprimer-film/{id}
      controller: App\Controller\FilmController::supprimerFilm
-liste_entre_deux_an:
-     path: /list-film2an/{annee1}.{annee2}
-     controller: App\Controller\FilmController::listFilm2An
-     requirements: 
-        annee1: \d+
-        annee2: \d+
+     requirements:
+          id: \d+ 
+film_entre_deux_annees:
+     path: /film-entre-deux-ans/
+     controller: App\Controller\FilmController::entreDeuxAnnees
+     
 liste_avant_date:
      path: /liste-filmb4date/{date}
      controller: App\Controller\FilmController::listeFilmB4Date

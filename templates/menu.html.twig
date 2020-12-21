@@ -17,6 +17,10 @@
 	</p>
 
 	<p>
+		<a href="{{ path('film_entre_deux_annees') }}">
+			Liste des films</a>
+	</p>
+	<p>
 		<ul>
 			{% for mesg in app.session.flashbag.get('pageNotFound') %}
 				<li>{{ mesg }}</li>

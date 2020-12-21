@@ -47,4 +47,25 @@ class FilmRepository extends ServiceEntityRepository
         ;
     }
     */
+    /**
+     * @return Film[]
+     */
+    public function findBetweenTwoYears(int $year1, int $year2): array
+    {
+        $eM = $this->getEntityManager();
+        if ($year1 > $year2) {
+            $year = $year2;
+            $year2 = $year1;
+            $year1 = $year;
+        }
+        $qb = $eM->createQueryBuilder()
+        ->select('f')
+        ->from('App\Entity\Film','f')
+        ->where('YEAR(f.dateSortie) > :year1 - 1')
+        ->andwhere('YEAR(f.dateSortie) < :year2 + 1')
+        ->setParameters(['year1' => $year1, 'year2' => $year2])
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

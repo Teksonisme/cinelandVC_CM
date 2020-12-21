@@ -1,9 +1,7 @@
 # index:
 #     path: /
 #     controller: App\Controller\GenreController::accueil
-redirect:
-     path: /
-     controller: App\Controller\CinelandController::redirect
+
 liste_genre:
      path: /liste
      controller: App\Controller\GenreController::listeGenre
