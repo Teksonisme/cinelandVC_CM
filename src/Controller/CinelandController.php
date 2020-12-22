@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CinelandController extends AbstractController
 {
-
+    
     public function menu(Session $session)
     {
         return $this->render('menu.html.twig');

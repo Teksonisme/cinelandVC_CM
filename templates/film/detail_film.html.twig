@@ -4,19 +4,32 @@
 {% endblock %}
 {% block contenu %}
 
-	<p>Titre : {{titre}}
+	<p>Titre :
+		{{titre}}
 	</p>
-	<p>Durée : {{duree}} minute(s)
+	<p>Genre :
+		{{genre}}
 	</p>
-	<p>Date de sortie : {{dateSortie}}
+	<p>Durée :
+		{{duree}}
+		minute(s)
 	</p>
-	<p>Note : {{note}}/20
+	<p>Date de sortie :
+		{{dateSortie}}
 	</p>
-	<p>PEGI : {{ageMinimal}}
+	<p>Note :
+		{{note}}/20
 	</p>
+	<p>PEGI :
+		{{ageMinimal}}
+	</p>
+	Acteur ayant joués dedans :
+</br>
+{% for acteur in acteurs %}
+	<p>{{acteur.nomPrenom}}</p>
+{% endfor %}
 
-	<a href="{{ path('modifier_film', { 'id': film.id }) }}">
-		Modifier</a>
-	<a href="{{ path('supprimer_film', { 'id': film.id }) }}">
-		Supprimer</a>
-{% endblock %}
+<a href="{{ path('modifier_film', { 'id': film.id }) }}">
+	Modifier</a>
+<a href="{{ path('supprimer_film', { 'id': film.id }) }}">
+	Supprimer</a>{% endblock %}

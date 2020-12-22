@@ -49,6 +49,7 @@ class FilmRepository extends ServiceEntityRepository
     */
     /**
      * @return Film[]
+     * Action 13
      */
     public function findBetweenTwoYears(int $year1, int $year2): array
     {
@@ -68,6 +69,8 @@ class FilmRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+    # * Action 14
+    # *
     public function findBeforeOneYear(int $year): array
     {
         $eM = $this->getEntityManager();
@@ -80,6 +83,27 @@ class FilmRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+    public function findWithAFilm(Film $film): array
+    {
+        $idFilm = $film->getId();
 
+        $eM = $this->getEntityManager();
+        $qb = $eM->createQueryBuilder()
+        ->select('a')
+        ->from('App\Entity\Acteur','a')
+        ->where('f.id = :idFilm')
+        // ->innerJoin('f.acteurs','a', 'WITH', 'f.id = :idFilm')
+        ->setParameter('idFilm', $idFilm)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+    public function findByName(String $name){
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.titre = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
 }

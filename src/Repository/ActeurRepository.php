@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Acteur;
+use App\Entity\Film;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,11 @@ class ActeurRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByName(String $name){
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.nomPrenom = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

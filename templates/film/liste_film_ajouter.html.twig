@@ -1,5 +1,6 @@
 {% extends "first_layer.html.twig" %}
 {% block titre %}
+
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
@@ -11,12 +12,13 @@
 	<h3>{{titre_liste}}</h3>
 
 	<div id="list">
-		{% for genre in genres %}
+		{% for film in films %}
 			<p>
-
-				{{genre.nom}}
+				<a href="{{ path('detail_film', { 'id': film.id }) }}">
+					{{film.titre}}</a>
 			</p>
 		{% endfor %}
 	</div>
+
 
 {% endblock %}

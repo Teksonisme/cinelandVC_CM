@@ -20,7 +20,7 @@ class GenreController extends AbstractController
             ->getRepository(Genre::class)->findAll();
         $form = $this->createFormBuilder($genre)
             ->add('nom', TextType::class)
-            ->add('Apply', SubmitType::class)
+            ->add('Ajouter', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -31,7 +31,12 @@ class GenreController extends AbstractController
         }
         return $this->render(
             'genre/liste_genre.html.twig',
-            array('genres' => $genres, 'formulaire' => $form->createView())
+            array(
+                'genres' => $genres,
+                'formulaire' => $form->createView(),
+                'titre_liste' => "Liste des genres", 
+                'titre_form' => "Ajouter votre genre"
+            )
         );
     }
 }

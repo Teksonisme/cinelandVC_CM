@@ -3,26 +3,23 @@
 #     controller: App\Controller\FilmController::accueil
 
 liste_film:
-     path: /liste-film
+     path: /liste
      controller: App\Controller\FilmController::listeFilm
 detail_film:
-     path: /detail-film/{id}
+     path: /detail/{id}
      controller: App\Controller\FilmController::detailFilm
      requirements:
           id: \d+
 modifier_film:
-     path: /modifier-film/{id}
+     path: /modifier/{id}
      controller: App\Controller\FilmController::modifierFilm
      requirements:
           id: \d+
 modifier2_film: 
-     path: /modifier2-film/{id}
+     path: /modifier2/{id}
      controller: App\Controller\FilmController::modifierFilm
      requirements:
           id: \d+ 
-ajouter_film:
-     path: /ajouter-film
-     controller: App\Controller\FilmController::ajouterFilm
 supprimer_film:
      path: /supprimer-film/{id}
      controller: App\Controller\FilmController::supprimerFilm
@@ -36,7 +33,16 @@ film_entre_deux_annees:
 film_avant_une_annee:
      path: /liste-avant-une-annee/
      controller: App\Controller\FilmController::avantUneAnnee
-     
+
+
+ajouter_acteur:
+     path: /ajout-acteur/{id}
+     controller: App\Controller\FilmController::ajouterActeur
+     requirements:
+          id: \d+ 
+
+
+
 liste_film_acteur:
      path: /liste-film/{id}
      controller: App\Controller\FilmController::listeFilmActeur

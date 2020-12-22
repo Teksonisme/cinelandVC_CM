@@ -4,15 +4,15 @@
 {% endblock %}
 {% block contenu %}
 
-	<p>{{nomPrenom}}
+	<p>Prénom/Nom : {{nomPrenom}}
 	</p>
-	<p>{{date_naissance}}
+	<p>Date de naissance : {{date_naissance}}
 	</p>
-	<p>{{nationalite}}
+	<p>Nationalité : {{nationalite}}
 	</p>
-
+	Films : </br>
 	{% for film in films %}
-		<p>{{film.nom}}</p>
+		<p>{{film.titre}}</p>
 	{% endfor %}
 	<a href="{{ path('modifier_acteur', { 'id': acteur.id }) }}">
 		Modifier</a>

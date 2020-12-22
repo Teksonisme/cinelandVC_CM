@@ -35,6 +35,11 @@ class Genre
         $this->films = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getNom()."";
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,14 +58,14 @@ class Genre
     }
 
     /**
-     * @return Collection|film[]
+     * @return Collection|Film[]
      */
     public function getFilms(): Collection
     {
         return $this->films;
     }
 
-    public function addFilm(film $film): self
+    public function addFilm(Film $film): self
     {
         if (!$this->films->contains($film)) {
             $this->films[] = $film;
@@ -70,7 +75,7 @@ class Genre
         return $this;
     }
 
-    public function removeFilm(film $film): self
+    public function removeFilm(Film $film): self
     {
         if ($this->films->removeElement($film)) {
             // set the owning side to null (unless already changed)
@@ -81,5 +86,7 @@ class Genre
 
         return $this;
     }
+
+    
 
 }

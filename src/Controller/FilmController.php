@@ -11,18 +11,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use App\Entity\Film;
+use App\Entity\Acteur;
 use App\Form\Type\FilmType;
+use App\Form\Type\ActeurFormType;
+use App\Repository\FilmRepository;
 
 class FilmController extends AbstractController
 {
+    # * * * ACTION 8 * * * 
+    #       *  *  *
     public function listeFilm(Request $request)
     {
         $film = new Film;
         $films = $this->getDoctrine()
             ->getRepository(Film::class)->findAll();
         $form = $this->createForm(FilmType::class, $film);
-        $form->add('Apply', SubmitType::class);
+        $form->add('Appliquer', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $eM = $this->getDoctrine()->getManager();
@@ -31,7 +38,7 @@ class FilmController extends AbstractController
             return $this->redirectToRoute('liste_film');
         }
         return $this->render(
-            'film/liste_film_et_form.html.twig',
+            'film/liste_film_ajouter.html.twig',
             [
                 'films' => $films,
                 'formulaire' => $form->createView(),
@@ -40,6 +47,8 @@ class FilmController extends AbstractController
             ]
         );
     }
+    # * * * ACTION 9 * * * 
+    #       *  *  *
     public function detailFilm($id)
     {
         $film = $this->getDoctrine()
@@ -54,6 +63,7 @@ class FilmController extends AbstractController
             'film/detail_film.html.twig',
             [
                 'titre' => $film->getTitre(),
+                'genre' => $film->getGenre(),
                 'duree' => $film->getDuree(),
                 'dateSortie' => $film->getDateSortie()->format('d-m-Y'),
                 'note' => $film->getNote(),
@@ -63,11 +73,13 @@ class FilmController extends AbstractController
             ]
         );
     }
+    # * * * ACTION 11 * * * 
+    #       *   *   *
     public function modifierFilm($id)
     {
         $film = $this->getDoctrine()->getRepository(film::class)->find($id);
         if (!$film) {
-            throw $this->createNotFoundException('L\'film[id=' . $id . '] n\'existe pas');
+            throw $this->createNotFoundException('Le film[id=' . $id . '] n\'existe pas');
         }
         $form = $this->createForm(
             FilmType::class,
@@ -76,11 +88,14 @@ class FilmController extends AbstractController
                 'modifier2_film',
                 ['id' => $film->getId()]
             )]
-        );
-        $form->add('submit', SubmitType::class, array('label' => 'Modifier'));
+        )
+            ->add('submit', SubmitType::class, array('label' => 'Modifier'));
         return $this->render(
             'film/modifier_film.html.twig',
-            ['formulaire' => $form->createView()]
+            [
+                'formulaire' => $form->createView(),
+                'id' => $id
+            ]
         );
     }
     public function modifier2Film(Request $request, $id)
@@ -95,8 +110,8 @@ class FilmController extends AbstractController
                 'film/modifier2_film',
                 ['id' => $film->getId()]
             )]
-        );
-        $form->add('submit', SubmitType::class, ['label' => 'Modifier']);
+        )
+            ->add('submit', SubmitType::class, ['label' => 'Modifier']);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $eM = $this->getDoctrine()->getManager();
@@ -110,9 +125,50 @@ class FilmController extends AbstractController
         }
         return $this->render(
             'modifier_film.html.twig',
-            ['formulaire' => $form->createView()]
+            [
+                'formulaire' => $form->createView(),
+                'id' => $id
+            ]
         );
     }
+    public function ajouterActeur(Request $request, $id)
+    {
+        $acteur = new Acteur;
+        $film = $this->getDoctrine()->getRepository(Film::class)->find($id);
+        $form = $this->createForm(
+            ActeurFormType::class,
+            $acteur
+        )
+            ->add('submit', SubmitType::class, ['label' => 'Ajouter']);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $acteur = $this->getDoctrine()->getRepository(Acteur::class)
+                ->findByName($form->getData()->getNomPrenom());
+            $eM = $this->getDoctrine()->getManager();
+            $eM->persist($film);
+            $eM->persist($acteur);
+            $film->addActeur($acteur);
+            $eM->flush();
+            return $this->redirectToRoute(
+                'detail_film',
+                [
+                    'id' => $film->getId()
+                ]
+            );
+        }
+        return $this->render(
+            'film/ajouter_retirer_acteur.html.twig',
+            [
+                'formulaire' => $form->createView()
+            ]
+        );
+    }
+    public function retirerActeur()
+    {
+    }
+    # * * * ACTION 12 * * * 
+    #       *   *   *
     public function supprimerFilm($id, Session $session)
     {
         $film = $this->getDoctrine()->getRepository(Film::class)->find($id);

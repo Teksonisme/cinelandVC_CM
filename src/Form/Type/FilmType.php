@@ -3,11 +3,15 @@
 namespace App\Form\Type;
 
 use App\Entity\Film;
+use App\Entity\Genre;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class FilmType extends AbstractType
@@ -26,7 +30,19 @@ class FilmType extends AbstractType
                 ]
             )
             ->add('note', IntegerType::class)
-            ->add('ageMinimal', IntegerType::class);
+            ->add('ageMinimal', IntegerType::class)
+            ->add(
+                'genre',
+                EntityType::class,
+                ['class' => Genre::class]
+            )
+            // # IL FAUT DONNER UN CHOIX MULTIPLE
+            // ->add(
+            //     'acteurs',
+            //     CollectionType::class,
+            //     ['entry_type' => ActeurFormType::class]
+            // );
+            ;
     }
     public function configureOptions(OptionsResolver $resolver)
     {

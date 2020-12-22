@@ -3,28 +3,31 @@
 #     controller: App\Controller\ActeurController::accueil
 
 liste_acteur:
-     path: /liste-acteur
+     path: /liste
      controller: App\Controller\ActeurController::listeActeur
 detail_acteur:
-     path: /detail-acteur/{id}
+     path: /detail/{id}
      controller: App\Controller\ActeurController::detailActeur
      requirements:
           id: \d+
 modifier_acteur:
-     path: /modifier-acteur/{id}
+     path: /modifier/{id}
      controller: App\Controller\ActeurController::modifierActeur
      requirements:
           id: \d+
 modifier2_acteur: 
-     path: /modifier2-acteur/{id}
+     path: /modifier2/{id}
      controller: App\Controller\ActeurController::modifier2Acteur
      requirements:
           id: \d+         
 supprimer_acteur:
-     path: /supprimer-acteur/{id}
+     path: /supprimer/{id}
      controller: App\Controller\ActeurController::supprimerActeur
      requirements:
           id: \d+ 
+liste_acteurs_selon_film:
+     path: /acteurs-selon-film/
+     controller: App\Controller\ActeurController::acteurSelonFilm
 
 liste_acteur_3film:
      path: /liste-acteur-3film/

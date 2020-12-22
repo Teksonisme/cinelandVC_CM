@@ -7,11 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+use App\Entity\Film;
 use App\Entity\Acteur;
+use App\Form\Type\FilmFormType;
 use App\Form\Type\ActeurType;
 
 class ActeurController extends AbstractController
 {
+    # * * * ACTION 3 et 5 * * * 
+    #       *     *     *
     public function listeActeur(Request $request)
     {
         $acteur = new Acteur;
@@ -27,10 +31,16 @@ class ActeurController extends AbstractController
             return $this->redirectToRoute('liste_acteur');
         }
         return $this->render(
-            'acteur/liste_acteur.html.twig',
-            array('acteurs' => $acteurs, 'formulaire' => $form->createView())
+            'acteur/liste_acteur_ajouter.html.twig',
+            array(
+                'acteurs' => $acteurs, 
+                'formulaire' => $form->createView(),
+                'titre_form' => "Ajouter un acteur",
+                'titre_liste' => "Liste des acteurs :")
         );
     }
+    # * * * ACTION 4 * * * 
+    #       *  *  *
     public function detailActeur($id)
     {
         $acteur = $this->getDoctrine()
@@ -45,13 +55,15 @@ class ActeurController extends AbstractController
             'acteur/detail_acteur.html.twig',
             [
                 'nomPrenom' => $acteur->getNomPrenom(),
-                'date_naissance' => $acteur->getDateNaissance(),
+                'date_naissance' => $acteur->getDateNaissance()->format('d-m-Y'),
                 'nationalite' => $acteur->getNationalite(),
                 'films' => $acteur->getFilms(),
                 'acteur' => $acteur
             ]
         );
     }
+    # * * * ACTION 6 * * * 
+    #       *  *  *
     public function modifierActeur($id)
     {
         $acteur = $this->getDoctrine()->getRepository(Acteur::class)->find($id);
@@ -102,6 +114,8 @@ class ActeurController extends AbstractController
             array('formulaire' => $form->createView())
         );
     }
+    # * * * ACTION 7 * * * 
+    #       *  *  *
     public function supprimerActeur($id)
     {
         $acteur = $this->getDoctrine()->getRepository(Acteur::class)->find($id);
@@ -113,5 +127,41 @@ class ActeurController extends AbstractController
         $eM->flush();
 
         return $this->redirectToRoute('liste_acteur');
+    }
+    # * * * ACTION 15 * * * 
+    #       *   *   *
+    public function acteurSelonFilm(Request $request)
+    {
+        $film = new Film;
+        $form = $this->createForm(
+            FilmFormType::class,
+            $film
+        )
+        ->add('Rechercher', SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $film = $this->getDoctrine()->getRepository(Film::class)
+                ->findByName($form->getData()->getTitre());
+
+            $acteurs = $film->getActeurs();     
+            return $this->render(
+                'acteur/liste_acteur_et_form.html.twig',
+                [
+                    'formulaire' => $form->createView(),
+                    'acteurs' => $acteurs,
+                    'titre_liste' => "Liste des acteurs",
+                    'titre_form' => "Rechercher les acteurs selon un film :"
+                ]
+            );
+        }
+        return $this->render(
+            'acteur/liste_acteur_et_form.html.twig',
+            [
+                'formulaire' => $form->createView(),
+                'acteurs' => [],
+                'titre_liste' => "",
+                'titre_form' => "Rechercher les acteurs selon un film :"
+            ]
+        );
     }
 }

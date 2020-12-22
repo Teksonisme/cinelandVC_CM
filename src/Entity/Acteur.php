@@ -37,13 +37,18 @@ class Acteur
     private $nationalite;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Film::class, mappedBy="acteurs")
+     * @ORM\ManyToMany(targetEntity=Film::class, mappedBy="acteurs", cascade="persist")
      */
     private $films;
 
     public function __construct()
     {
         $this->films = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getNomPrenom()."";
     }
 
     public function getId(): ?int
@@ -63,6 +68,18 @@ class Acteur
         return $this;
     }
 
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->dateNaissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
+    {
+        $this->dateNaissance = $dateNaissance;
+
+        return $this;
+    }
+
     public function getNationalite(): ?string
     {
         return $this->nationalite;
@@ -76,38 +93,31 @@ class Acteur
     }
 
     /**
-     * @return Collection|film[]
+     * @return Collection|Film[]
      */
     public function getFilms(): Collection
     {
         return $this->films;
     }
 
-    public function addFilm(film $film): self
+    public function addFilm(Film $film): self
     {
         if (!$this->films->contains($film)) {
             $this->films[] = $film;
+            $film->addActeur($this);
         }
 
         return $this;
     }
 
-    public function removeFilm(film $film): self
+    public function removeFilm(Film $film): self
     {
-        $this->films->removeElement($film);
+        if ($this->films->removeElement($film)) {
+            $film->removeActeur($this);
+        }
 
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
-    {
-        return $this->dateNaissance;
-    }
-
-    public function setDateNaissance(\DateTimeInterface $dateNaissance): self
-    {
-        $this->dateNaissance = $dateNaissance;
-
-        return $this;
-    }
+    
 }

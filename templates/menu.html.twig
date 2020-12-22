@@ -25,6 +25,12 @@
 			Film avant une année</a>
 	</p>
 	<p>
+		<a href="{{ path('liste_acteurs_selon_film') }}">
+			Acteur selon un film</a>
+	</p>
+
+
+	<p>
 		<ul>
 			{% for mesg in app.session.flashbag.get('pageNotFound') %}
 				<li>{{ mesg }}</li>

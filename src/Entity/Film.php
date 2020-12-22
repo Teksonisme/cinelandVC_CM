@@ -46,7 +46,7 @@ class Film
     private $ageMinimal;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Acteur::class, inversedBy="films", cascade="persist")
+     * @ORM\ManyToMany(targetEntity=Acteur::class, inversedBy="films")
      */
     private $acteurs;
 
@@ -60,6 +60,11 @@ class Film
     public function __construct()
     {
         $this->acteurs = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitre()."";
     }
 
     public function getId(): ?int
@@ -87,6 +92,18 @@ class Film
     public function setDuree(int $duree): self
     {
         $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getDateSortie(): ?\DateTimeInterface
+    {
+        return $this->dateSortie;
+    }
+
+    public function setDateSortie(\DateTimeInterface $dateSortie): self
+    {
+        $this->dateSortie = $dateSortie;
 
         return $this;
     }
@@ -139,27 +156,17 @@ class Film
         return $this;
     }
 
-    public function getGenre(): ?genre
+    public function getGenre(): ?Genre
     {
         return $this->genre;
     }
 
-    public function setGenre(?genre $genre): self
+    public function setGenre(?Genre $genre): self
     {
         $this->genre = $genre;
 
         return $this;
     }
 
-    public function getDateSortie(): ?\DateTimeInterface
-    {
-        return $this->dateSortie;
-    }
-
-    public function setDateSortie(\DateTimeInterface $dateSortie): self
-    {
-        $this->dateSortie = $dateSortie;
-
-        return $this;
-    }
+    
 }
