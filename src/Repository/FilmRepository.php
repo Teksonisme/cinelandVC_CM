@@ -68,4 +68,18 @@ class FilmRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
+    public function findBeforeOneYear(int $year): array
+    {
+        $eM = $this->getEntityManager();
+        $qb = $eM->createQueryBuilder()
+        ->select('f')
+        ->from('App\Entity\Film','f')
+        ->where('YEAR(f.dateSortie) < :year')
+        ->setParameter('year', $year)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 }

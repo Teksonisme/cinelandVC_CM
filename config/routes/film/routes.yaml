@@ -28,16 +28,16 @@ supprimer_film:
      controller: App\Controller\FilmController::supprimerFilm
      requirements:
           id: \d+ 
+# * * * Action 13 * * * 
 film_entre_deux_annees:
      path: /film-entre-deux-ans/
      controller: App\Controller\FilmController::entreDeuxAnnees
+# * * * Action 14 * * * 
+film_avant_une_annee:
+     path: /liste-avant-une-annee/
+     controller: App\Controller\FilmController::avantUneAnnee
      
-liste_avant_date:
-     path: /liste-filmb4date/{date}
-     controller: App\Controller\FilmController::listeFilmB4Date
-    #  requirements:
-    #     date: ^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$
-liste_film_acteur: #On donne ici le film pour trouver tous les acteurs
+liste_film_acteur:
      path: /liste-film/{id}
      controller: App\Controller\FilmController::listeFilmActeur
      requirements: 

@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+
 use App\Entity\Film;
 use App\Form\Type\FilmType;
 
@@ -27,8 +31,13 @@ class FilmController extends AbstractController
             return $this->redirectToRoute('liste_film');
         }
         return $this->render(
-            'film/liste_film.html.twig',
-            array('films' => $films, 'formulaire' => $form->createView())
+            'film/liste_film_et_form.html.twig',
+            [
+                'films' => $films,
+                'formulaire' => $form->createView(),
+                'titre_liste' => "Liste des films",
+                'titre_form' => "Ajouter un film !"
+            ]
         );
     }
     public function detailFilm($id)
@@ -65,13 +74,13 @@ class FilmController extends AbstractController
             $film,
             ['action' => $this->generateUrl(
                 'modifier2_film',
-                array('id' => $film->getId())
+                ['id' => $film->getId()]
             )]
         );
         $form->add('submit', SubmitType::class, array('label' => 'Modifier'));
         return $this->render(
             'film/modifier_film.html.twig',
-            array('formulaire' => $form->createView())
+            ['formulaire' => $form->createView()]
         );
     }
     public function modifier2Film(Request $request, $id)
@@ -84,10 +93,10 @@ class FilmController extends AbstractController
             $film,
             ['action' => $this->generateUrl(
                 'film/modifier2_film',
-                array('id' => $film->getId())
+                ['id' => $film->getId()]
             )]
         );
-        $form->add('submit', SubmitType::class, array('label' => 'Modifier'));
+        $form->add('submit', SubmitType::class, ['label' => 'Modifier']);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $eM = $this->getDoctrine()->getManager();
@@ -95,35 +104,43 @@ class FilmController extends AbstractController
             $eM->flush();
             $url = $this->generateUrl(
                 'detail_film',
-                array('id' => $film->getId())
+                ['id' => $film->getId()]
             );
             return $this->redirect($url);
         }
         return $this->render(
             'modifier_film.html.twig',
-            array('formulaire' => $form->createView())
+            ['formulaire' => $form->createView()]
         );
     }
-    public function supprimerFilm($id)
+    public function supprimerFilm($id, Session $session)
     {
         $film = $this->getDoctrine()->getRepository(Film::class)->find($id);
         if (!$film) {
             throw $this->createNotFoundException('L\'film[id=' . $id . '] n\'existe pas');
         }
+        $session->getFlashBag()
+            ->add('filmSupprime', 'Le film :' . $film->getTitre() . ' a été supprimé avec succès.');
         $eM = $this->getDoctrine()->getManager();
         $eM->remove($film);
         $eM->flush();
 
         return $this->redirectToRoute('liste_film');
     }
+
+    # * * * ACTION 13 * * * 
     public function entreDeuxAnnees(Request $request)
     {
-        $film = new Film;
+
         $films =  [];
         $defaultData = ['message' => 'Type your message here'];
         $form = $this->createFormBuilder($defaultData)
-            ->add('annee_1', TextType::class)
-            ->add('annee_2', TextType::class)
+            ->add('annee_1', IntegerType::class, [
+                'attr' => ['min' => 1900, 'max' => 2020]
+            ])
+            ->add('annee_2', IntegerType::class, [
+                'attr' => ['min' => 1900, 'max' => 2020]
+            ])
             ->add('Rechercher', SubmitType::class)
             ->getForm();
         $form->handleRequest($request);
@@ -131,21 +148,64 @@ class FilmController extends AbstractController
             $year1 = $form['annee_1']->getData();
             $year2 = $form['annee_2']->getData();
             $films = $this->getDoctrine()
-            ->getRepository(Film::class)
-            ->findBetweenTwoYears($year1, $year2);
+                ->getRepository(Film::class)
+                ->findBetweenTwoYears($year1, $year2);
             return $this->render(
-                'film/liste_film_entre_deux_annees.html.twig',
-                ['formulaire' => $form->createView(),
-                'films' => $films]
+                'film/liste_film_et_form.html.twig',
+                [
+                    'formulaire' => $form->createView(),
+                    'films' => $films,
+                    'titre_liste' => "Liste des films",
+                    'titre_form' => "Rechercher les films entre deux années :"
+                ]
             );
         }
-
         return $this->render(
-            'film/liste_film_entre_deux_annees.html.twig',
-            ['formulaire' => $form->createView(),
-            'films' => $films]
+            'film/liste_film_et_form.html.twig',
+            [
+                'formulaire' => $form->createView(),
+                'films' => $films,
+                'titre_liste' => "",
+                'titre_form' => "Rechercher les films entre deux années :"
+            ]
         );
     }
 
-
+    # * * * ACTION 14 * * * 
+    public function avantUneAnnee(Request $request)
+    {
+        $films =  [];
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('annee_1', IntegerType::class, [
+                'attr' => ['min' => 1900, 'max' => 2020]
+            ])
+            ->add('Rechercher', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $year = $form['annee_1']->getData();
+            $films = $this->getDoctrine()
+                ->getRepository(Film::class)
+                ->findBeforeOneYear($year);
+            return $this->render(
+                'film/liste_film_et_form.html.twig',
+                [
+                    'formulaire' => $form->createView(),
+                    'films' => $films,
+                    'titre_liste' => "Liste des films",
+                    'titre_form' => "Rechercher les films avant une année :"
+                ]
+            );
+        }
+        return $this->render(
+            'film/liste_film_et_form.html.twig',
+            [
+                'formulaire' => $form->createView(),
+                'films' => $films,
+                'titre_liste' => "",
+                'titre_form' => "Rechercher les films avant une année :"
+            ]
+        );
+    }
 }

@@ -15,7 +15,7 @@ class ActeurType extends AbstractType
     {
         $builder->add('nomPrenom', TextType::class)
             ->add(
-                'dateSortie',
+                'dateNaissance',
                 DateType::class,
                 [
                     'years' => range(1900, 2020),
