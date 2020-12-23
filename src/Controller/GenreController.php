@@ -79,7 +79,7 @@ class GenreController extends AbstractController
                 [
                     'titre_form' => "Donner votre acteur",
                     'formulaire' => $form->createView(),
-                    'titre_liste' => "Liste des genre(s :",
+                    'titre_liste' => "Liste des genre(s) présent dans au moins deux films :",
                     'genres' => $genres
                 ]
             );
