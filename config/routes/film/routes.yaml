@@ -2,14 +2,17 @@
 #     path: /
 #     controller: App\Controller\FilmController::accueil
 
+# * * * Action 8 et 10* * * 
 liste_film:
      path: /liste
      controller: App\Controller\FilmController::listeFilm
+# * * * Action 9 * * * 
 detail_film:
      path: /detail/{id}
      controller: App\Controller\FilmController::detailFilm
      requirements:
           id: \d+
+# * * * Action 11 * * * 
 modifier_film:
      path: /modifier/{id}
      controller: App\Controller\FilmController::modifierFilm
@@ -20,6 +23,16 @@ modifier2_film:
      controller: App\Controller\FilmController::modifierFilm
      requirements:
           id: \d+ 
+ajouter_acteur:
+     path: /ajouter-acteur/{id}
+     controller: App\Controller\FilmController::ajouterActeur
+     requirements:
+          id: \d+ 
+retirer_acteur:
+     path: /retirer-acteur/{id}
+     controller: App\Controller\FilmController::retirerActeur
+     requirements:
+# * * * Action 12 * * *           
 supprimer_film:
      path: /supprimer-film/{id}
      controller: App\Controller\FilmController::supprimerFilm
@@ -33,32 +46,7 @@ film_entre_deux_annees:
 film_avant_une_annee:
      path: /liste-avant-une-annee/
      controller: App\Controller\FilmController::avantUneAnnee
-
-
-ajouter_acteur:
-     path: /ajout-acteur/{id}
-     controller: App\Controller\FilmController::ajouterActeur
-     requirements:
-          id: \d+ 
-
-
-
-liste_film_acteur:
-     path: /liste-film/{id}
-     controller: App\Controller\FilmController::listeFilmActeur
-     requirements: 
-        id: \d+
-liste_acteur_3film:
-     path: /liste-acteur-3film/
-     controller: App\Controller\FilmController::listeActeur3Film
-liste_film_acteur_chronologique:
-     path: /liste-film-chronologique/
-     controller: App\Controller\FilmController::listeFilmChronologique
-augmenter_note_film:
-     path: /augmenter-note-film/{note}
-     controller: App\Controller\FilmController::augmenterNoteFilm
-     requirements: 
-        note: \d+
-recherche_film_partie_titre:
-     path: /rechercher-film-partie-titre/{partie}
-     controller: App\Controller\FilmController::rechercheFilmPartieTitre
+# * * * Action 25 * * * 
+rechercher_avec_partie_titre:
+     path: /recherche
+     controller: App\Controller\FilmController::rechercherAvecPartieTitre

@@ -33,13 +33,14 @@ class ActeurController extends AbstractController
         return $this->render(
             'acteur/liste_acteur_ajouter.html.twig',
             array(
-                'acteurs' => $acteurs, 
+                'acteurs' => $acteurs,
                 'formulaire' => $form->createView(),
                 'titre_form' => "Ajouter un acteur",
-                'titre_liste' => "Liste des acteurs :")
+                'titre_liste' => "Liste des acteurs :"
+            )
         );
     }
-    # * * * ACTION 4 * * * 
+    # * * * ACTION 4 et 19 et 21* * * 
     #       *  *  *
     public function detailActeur($id)
     {
@@ -51,6 +52,12 @@ class ActeurController extends AbstractController
                 'Acteur[id=' . $id . '] doesn\'t exist'
             );
         }
+        $films = $acteur->getFilms();
+        $duree = 0; $genres = [];
+        foreach ($films as $film) {
+            $duree += $film->getDuree();
+            if(!in_array($film->getGenre(),$genres)) $genres[] = $film->getGenre();
+        }
         return $this->render(
             'acteur/detail_acteur.html.twig',
             [
@@ -58,7 +65,9 @@ class ActeurController extends AbstractController
                 'date_naissance' => $acteur->getDateNaissance()->format('d-m-Y'),
                 'nationalite' => $acteur->getNationalite(),
                 'films' => $acteur->getFilms(),
-                'acteur' => $acteur
+                'acteur' => $acteur,
+                'duree_films' => $duree,
+                'genres' => $genres
             ]
         );
     }
@@ -137,13 +146,13 @@ class ActeurController extends AbstractController
             FilmFormType::class,
             $film
         )
-        ->add('Rechercher', SubmitType::class);
+            ->add('Rechercher', SubmitType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $film = $this->getDoctrine()->getRepository(Film::class)
                 ->findByName($form->getData()->getTitre());
 
-            $acteurs = $film->getActeurs();     
+            $acteurs = $film->getActeurs();
             return $this->render(
                 'acteur/liste_acteur_et_form.html.twig',
                 [
@@ -163,5 +172,30 @@ class ActeurController extends AbstractController
                 'titre_form' => "Rechercher les acteurs selon un film :"
             ]
         );
+    }
+    # * * * ACTION 16 * * * 
+    #       *   *   *
+    public function acteurAvecTroisFilms()
+    {
+        $acteurs = $this->getDoctrine()->getRepository(Acteur::class)
+            ->findAll();
+        foreach ($acteurs as $acteur) {
+            if (count($acteur->getFilms()) >= 3) {
+                $acteurs3[] = $acteur;
+            }
+        }
+        return $this->render(
+            'acteur/liste_acteur.html.twig',
+            [
+                'acteurs' => $acteurs3,
+                'titre_liste' => "Acteur(s) ayant plus de trois films : ",
+                'titre_form' => ""
+            ]
+        );
+    }
+    # * * * ACTION 17 * * * 
+    #       *   *   *
+    public function deuxActeursDansMemeFilm()
+    {
     }
 }

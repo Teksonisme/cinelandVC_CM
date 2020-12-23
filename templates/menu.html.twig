@@ -3,14 +3,10 @@
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
-	<p>
-		<a href="{{ path('liste_acteur') }}">
-			Liste des acteurs</a>
-	</p>
-	<p>
-		<a href="{{ path('liste_genre') }}">
-			Liste des genres</a>
-	</p>
+	{# Films #}
+	<h2>
+		Film
+	</h2>
 	<p>
 		<a href="{{ path('liste_film') }}">
 			Liste des films</a>
@@ -25,12 +21,44 @@
 			Film avant une année</a>
 	</p>
 	<p>
+		<a href="{{ path('rechercher_avec_partie_titre') }}">
+			Rechercher un film avec une partie de son titre</a>
+	</p>
+	{# Acteurs #}
+	<h2>
+		Acteur
+	</h2>
+	<p>
+		<a href="{{ path('liste_acteur') }}">
+			Liste des acteurs</a>
+	</p>
+	<p>
 		<a href="{{ path('liste_acteurs_selon_film') }}">
 			Acteur selon un film</a>
 	</p>
-
-
 	<p>
+		<a href="{{ path('liste_acteurs_trois_films') }}">
+			Acteur(s) ayant trois films</a>
+	</p>
+	{# Genres #}
+	<h2>
+		Genre
+	</h2>
+	<p>
+		<a href="{{ path('liste_genre') }}">
+			Liste des genres</a>
+	</p>
+	<p>
+		<a href="{{ path('liste_genres_acteur') }}">
+			Genres pour un acteur donnée ayant deux films différent</a>
+	</p>
+	<p>
+		<a href="{{ path('duree_films_pour_genre') }}">
+			Durée des films d'un genre</a>
+	</p>
+	<p>
+
+		{# Flashbags #}
 		<ul>
 			{% for mesg in app.session.flashbag.get('pageNotFound') %}
 				<li>{{ mesg }}</li>

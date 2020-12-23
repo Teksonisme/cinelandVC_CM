@@ -2,7 +2,6 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Acteur;
 use App\Entity\Film;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;

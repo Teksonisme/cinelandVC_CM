@@ -28,6 +28,13 @@ supprimer_acteur:
 liste_acteurs_selon_film:
      path: /acteurs-selon-film/
      controller: App\Controller\ActeurController::acteurSelonFilm
+liste_acteurs_trois_films:
+     path: /acteurs-trois-films/
+     controller: App\Controller\ActeurController::acteurAvecTroisFilms
+
+
+
+
 
 liste_acteur_3film:
      path: /liste-acteur-3film/

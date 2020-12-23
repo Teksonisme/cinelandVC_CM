@@ -2,29 +2,30 @@
 
 namespace App\Form\Type;
 
-use App\Entity\Acteur;
+use App\Entity\Genre;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class ActeurFormType extends AbstractType
+class GenreFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
-                'nomPrenom',
+                'nom',
                 EntityType::class,
                 [
-                    'class' => Acteur::class
+                    'class' => Genre::class
                 ]
             );
     }
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Acteur::class,
+            'data_class' => Genre::class,
         ));
     }
 }

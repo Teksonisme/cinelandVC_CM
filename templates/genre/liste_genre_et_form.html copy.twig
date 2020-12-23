@@ -1,0 +1,13 @@
+{% extends "first_layer.html.twig" %}
+{% block titre %}
+	{{ parent() }}
+{% endblock %}
+{% block contenu %}
+
+	<h3>{{ titre_form }}</h3>
+
+	{{ form_start(formulaire) }}
+	{{ form_end(formulaire) }}
+	{{ include('genre/liste_genre.html.twig') }}
+
+{% endblock %}

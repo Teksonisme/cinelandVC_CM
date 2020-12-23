@@ -4,18 +4,29 @@
 {% endblock %}
 {% block contenu %}
 
-	<p>Prénom/Nom : {{nomPrenom}}
+	<p>Prénom/Nom :
+		{{nomPrenom}}
 	</p>
-	<p>Date de naissance : {{date_naissance}}
+	<p>Date de naissance :
+		{{date_naissance}}
 	</p>
-	<p>Nationalité : {{nationalite}}
+	<p>Nationalité :
+		{{nationalite}}
 	</p>
-	Films : </br>
-	{% for film in films %}
-		<p>{{film.titre}}</p>
-	{% endfor %}
-	<a href="{{ path('modifier_acteur', { 'id': acteur.id }) }}">
-		Modifier</a>
-	<a href="{{ path('supprimer_acteur', { 'id': acteur.id }) }}">
-		Supprimer</a>
-{% endblock %}
+	<h3>Liste des genres de l'acteur :</h3>
+	(
+	{% for genre in genres %}
+		"{{genre.nom}}"
+	{% endfor %})
+</br>
+<h3>Liste des films de l'acteur</h3>
+(durée totale :
+{{duree_films}}
+minutes):</br>{% for film in films %}
+<p>
+	<i>
+		<a href="{{ path('detail_film', { 'id' : film.id }) }}">{{film.titre}}</a>
+	</i>
+</p>{% endfor %}<a href="{{ path('modifier_acteur', { 'id': acteur.id }) }}">
+Modifier</a><a href="{{ path('supprimer_acteur', { 'id': acteur.id }) }}">
+Supprimer</a>{% endblock %}

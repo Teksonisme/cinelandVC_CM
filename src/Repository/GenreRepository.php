@@ -47,4 +47,11 @@ class GenreRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByName(String $name){
+        return $this->createQueryBuilder('g')
+            ->andWhere('g.nom = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

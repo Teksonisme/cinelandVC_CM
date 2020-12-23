@@ -8,4 +8,9 @@
 		<a href="{{ path('ajouter_acteur', { 'id': id }) }}">
 			Ajouter un acteur à ce film</a>
 	</p>
+	<p>
+		<a href="{{ path('retirer_acteur', { 'id': id }) }}">
+			Retirer un acteur à ce film</a>
+	</p>
+	<a href="{{path('detail_film', { 'id': id }) }}">Abandonner</a>
 {% endblock %}

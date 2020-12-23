@@ -10,14 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 use App\Entity\Film;
 use App\Entity\Acteur;
 use App\Form\Type\FilmType;
 use App\Form\Type\ActeurFormType;
-use App\Repository\FilmRepository;
 
 class FilmController extends AbstractController
 {
@@ -142,7 +140,7 @@ class FilmController extends AbstractController
             ->add('submit', SubmitType::class, ['label' => 'Ajouter']);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $acteur = $this->getDoctrine()->getRepository(Acteur::class)
                 ->findByName($form->getData()->getNomPrenom());
             $eM = $this->getDoctrine()->getManager();
@@ -160,12 +158,46 @@ class FilmController extends AbstractController
         return $this->render(
             'film/ajouter_retirer_acteur.html.twig',
             [
-                'formulaire' => $form->createView()
+                'formulaire' => $form->createView(),
+                'film' => $film,
+                'titre_form' => "Ajouter un acteur de ce film :"
             ]
         );
     }
-    public function retirerActeur()
+    public function retirerActeur(Request $request, $id)
     {
+        $acteur = new Acteur;
+        $film = $this->getDoctrine()->getRepository(Film::class)->find($id);
+        $form = $this->createForm(
+            ActeurFormType::class,
+            $acteur
+        )
+            ->add('submit', SubmitType::class, ['label' => 'Retirer']);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $acteur = $this->getDoctrine()->getRepository(Acteur::class)
+                ->findByName($form->getData()->getNomPrenom());
+            $eM = $this->getDoctrine()->getManager();
+            $eM->persist($film);
+            $eM->persist($acteur);
+            $film->removeActeur($acteur);
+            $eM->flush();
+            return $this->redirectToRoute(
+                'detail_film',
+                [
+                    'id' => $film->getId()
+                ]
+            );
+        }
+        return $this->render(
+            'film/ajouter_retirer_acteur.html.twig',
+            [
+                'formulaire' => $form->createView(),
+                'film' => $film,
+                'titre_form' => "Retirer un acteur de ce film :"
+            ]
+        );
     }
     # * * * ACTION 12 * * * 
     #       *   *   *
@@ -185,6 +217,7 @@ class FilmController extends AbstractController
     }
 
     # * * * ACTION 13 * * * 
+    #       *   *   *
     public function entreDeuxAnnees(Request $request)
     {
 
@@ -263,5 +296,44 @@ class FilmController extends AbstractController
                 'titre_form' => "Rechercher les films avant une année :"
             ]
         );
+    }
+    # * * * ACTION 25 * * * 
+    public function rechercherAvecPartieTitre(Request $request)
+    {
+        $defaultData = []; $result = [];
+        $form = $this->createFormBuilder($defaultData)
+            ->add(
+                'recherche',
+                TextType::class
+            )
+            ->add('Rechercher', SubmitType::class)
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $films = $this->getDoctrine()->getRepository(Film::class)
+            ->findAll();
+            $text = $form['recherche']->getData();
+            $result = preg_grep("/$text/i", $films);
+
+            return $this->render(
+                'film/liste_film_et_form.html.twig',
+                [
+                    'formulaire' => $form->createView(),
+                    'films' => $result,
+                    'titre_liste' => "Liste des films correspondant : ",
+                    'titre_form' => "Rechercher les films avec une partie du titre :"
+                ]
+            );
+        }
+        return $this->render(
+            'film/liste_film_et_form.html.twig',
+            [
+                'formulaire' => $form->createView(),
+                'films' => $result,
+                'titre_liste' => "",
+                'titre_form' => "Rechercher les films avec une partie du titre :"
+            ]
+        );        
+
     }
 }

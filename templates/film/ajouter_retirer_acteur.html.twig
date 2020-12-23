@@ -3,6 +3,8 @@
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
+	<h2>{{ film.titre }}</h2>
+	<h3>{{ titre_form }}</h3>
 	{{ form(formulaire) }}
-	
-{% endblock %}
+	<a href="{{path('modifier_film', { 'id': film.id }) }}">Abandonner</a>
+	{% endblock %}

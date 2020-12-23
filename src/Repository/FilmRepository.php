@@ -92,7 +92,6 @@ class FilmRepository extends ServiceEntityRepository
         ->select('a')
         ->from('App\Entity\Acteur','a')
         ->where('f.id = :idFilm')
-        // ->innerJoin('f.acteurs','a', 'WITH', 'f.id = :idFilm')
         ->setParameter('idFilm', $idFilm)
         ;
 
@@ -105,5 +104,6 @@ class FilmRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+    
 
 }
