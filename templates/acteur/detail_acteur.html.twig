@@ -22,11 +22,17 @@
 <h3>Liste des films de l'acteur</h3>
 (durée totale :
 {{duree_films}}
-minutes):</br>{% for film in films %}
+minutes):</br>
+
+{% for film in films %}
 <p>
 	<i>
 		<a href="{{ path('detail_film', { 'id' : film.id }) }}">{{film.titre}}</a>
 	</i>
-</p>{% endfor %}<a href="{{ path('modifier_acteur', { 'id': acteur.id }) }}">
-Modifier</a><a href="{{ path('supprimer_acteur', { 'id': acteur.id }) }}">
-Supprimer</a>{% endblock %}
+</p>
+{% endfor %}
+<a href="{{ path('modifier_acteur', { 'id': acteur.id }) }}">
+Modifier</a>
+<a href="{{ path('supprimer_acteur', { 'id': acteur.id }) }}">
+Supprimer</a>
+{% endblock %}

@@ -36,7 +36,7 @@ class FilmController extends AbstractController
             return $this->redirectToRoute('liste_film');
         }
         return $this->render(
-            'film/liste_film_ajouter.html.twig',
+            'film/liste_film_et_form.html.twig',
             [
                 'films' => $films,
                 'formulaire' => $form->createView(),
@@ -205,7 +205,7 @@ class FilmController extends AbstractController
     {
         $film = $this->getDoctrine()->getRepository(Film::class)->find($id);
         if (!$film) {
-            throw $this->createNotFoundException('L\'film[id=' . $id . '] n\'existe pas');
+            throw $this->createNotFoundException('Le film[id=' . $id . '] n\'existe pas');
         }
         $session->getFlashBag()
             ->add('filmSupprime', 'Le film :' . $film->getTitre() . ' a été supprimé avec succès.');
@@ -264,8 +264,7 @@ class FilmController extends AbstractController
     public function avantUneAnnee(Request $request)
     {
         $films =  [];
-        $defaultData = ['message' => 'Type your message here'];
-        $form = $this->createFormBuilder($defaultData)
+        $form = $this->createFormBuilder(null)
             ->add('annee_1', IntegerType::class, [
                 'attr' => ['min' => 1900, 'max' => 2020]
             ])
@@ -297,11 +296,54 @@ class FilmController extends AbstractController
             ]
         );
     }
+    # * * * ACTION 17 * * * 
+    public function listeFilmPourDeuxActeurs(Request $request)
+    {
+        $tab1 = $tab2 = [];
+        $form = $this->createFormBuilder(null)
+            ->add('Acteur1', ActeurFormType::class)
+            ->add('Acteur2', ActeurFormType::class)
+            ->add('submit', SubmitType::class, ['label' => 'Rechercher'])
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $repo = $this->getDoctrine()->getRepository(Acteur::class);
+            $acteur1 = $repo->findByName($form['Acteur1']->getData()->getNomPrenom());
+            $acteur2 = $repo->findByName($form['Acteur2']->getData()->getNomPrenom());
+            $films1 = $acteur1->getFilms();
+            $films2 = $acteur2->getFilms();
+            foreach ($films1 as $film) {
+                $tab1[] = $film->getTitre();
+            }
+            foreach ($films2 as $film) {
+                $tab2[] = $film->getTitre();
+            }
+            $tab = array_intersect($tab1, $tab2);
+            return $this->render(
+                'film/liste_film_commun.html.twig',
+                [
+                    'formulaire' => $form->createView(),
+                    'films' => $tab,
+                    'titre_liste' => "Liste des films en commun",
+                    'titre_form' => "Donner deux acteurs afin de trouver leurs films en commun :"
+                ]
+            );
+        }
+        return $this->render(
+            'film/liste_film_commun.html.twig',
+            [
+                'formulaire' => $form->createView(),
+                'films' => $tab1,
+                'titre_liste' => "",
+                'titre_form' => "Donner deux acteurs afin de trouver leurs films en commun :"
+            ]
+        );
+    }
     # * * * ACTION 25 * * * 
     public function rechercherAvecPartieTitre(Request $request)
     {
-        $defaultData = []; $result = [];
-        $form = $this->createFormBuilder($defaultData)
+        $result = [];
+        $form = $this->createFormBuilder(null)
             ->add(
                 'recherche',
                 TextType::class
@@ -311,7 +353,7 @@ class FilmController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $films = $this->getDoctrine()->getRepository(Film::class)
-            ->findAll();
+                ->findAll();
             $text = $form['recherche']->getData();
             $result = preg_grep("/$text/i", $films);
 
@@ -333,7 +375,47 @@ class FilmController extends AbstractController
                 'titre_liste' => "",
                 'titre_form' => "Rechercher les films avec une partie du titre :"
             ]
-        );        
+        );
+    }
+    # * * * ACTION 26 * * * 
+    public function augmenterAgeMiniSelonActeur(Request $request)
+    {
+        $acteur = new Acteur;
+        $form = $this->createFormBuilder(null)
+            ->add('Acteur', ActeurFormType::class)
+            ->add('value', IntegerType::class, [
+                'data' => 1, 'required' => false, 'attr' => ['min' => 0]
+            ])
+            ->add('submit', SubmitType::class, ['label' => 'Appliquer'])
+            ->getForm();
 
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $acteur = $this->getDoctrine()->getRepository(Acteur::class)
+                ->findByName($form['Acteur']->getData()->getNomPrenom());
+            $nbr = $form['value']->getData();
+            $eM = $this->getDoctrine()->getManager();
+            $films = $acteur->getFilms();
+
+            foreach ($films as $film) {
+                $film->setAgeMinimal($film->getAgeMinimal() + $nbr);
+                $eM->persist($film);
+            }
+            $eM->flush();
+            return $this->render(
+                'film/augmenter_age_mini.html.twig',
+                [
+                    'formulaire' => $form->createView(),
+                    'titre_form' => "Augmenter l'age minimal de l'acteur :"
+                ]
+            );
+        }
+        return $this->render(
+            'film/augmenter_age_mini.html.twig',
+            [
+                'formulaire' => $form->createView(),
+                'titre_form' => "Augmenter l'age minimal de l'acteur :"
+            ]
+        );
     }
 }

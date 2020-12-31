@@ -1,24 +1,18 @@
 {% extends "first_layer.html.twig" %}
 {% block titre %}
-
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
 
-	<h3>{{ titre_form }}</h3>
-
-	{{ form_start(formulaire) }}
-	{{ form_end(formulaire) }}
 	<h3>{{titre_liste}}</h3>
 
 	<div id="list">
-		{% for film in films %}
+		{% for genre in genres %}
 			<p>
-				<a href="{{ path('detail_film', { 'id': film.id }) }}">
-					{{film.titre}}</a>
+				<a href="{{ path('supprimer_genre', { 'id': genre.id }) }}">
+					{{genre.nom}}</a>
 			</p>
 		{% endfor %}
 	</div>
-
 
 {% endblock %}

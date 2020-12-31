@@ -12,19 +12,9 @@
 		<div id="list">
 			{% for film in films %}
 				<p>
-					<a href="{{ path('detail_film', { 'id': film.id }) }}">
-						{{film.titre}}</a>
+					{{film}}
 				</p>
 			{% endfor %}
 		</div>
-		<p>
-
-			{# Flashbags #}
-			<ul>
-				{% for mesg in app.session.flashbag.get('filmSupprime') %}
-					<li>{{ mesg }}</li>
-				{% endfor %}
-			</ul>
-		</p>
 
 	{% endblock %}

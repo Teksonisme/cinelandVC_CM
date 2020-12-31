@@ -5,15 +5,15 @@
 {% endblock %}
 {% block contenu %}
 
-		<h3>{{titre_liste}}</h3>
-		<div id="list">
-			{% for acteur in acteurs %}
-				<p>
-					<a href="{{ path('detail_acteur', { 'id': acteur.id }) }}">
-						{{acteur.nomPrenom}}</a>
-				</p>
-			{% endfor %}
-		</div>
+	<h3>{{titre_liste}}</h3>
+	<div id="list">
+		{% for acteur in acteurs %}
+			<p>
+				<a href="{{ path('detail_acteur', { 'id': acteur.id }) }}">
+					{{acteur.nomPrenom}}</a>
+			</p>
+		{% endfor %}
+	</div>
 
 
-	{% endblock %}
+{% endblock %}

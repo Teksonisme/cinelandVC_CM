@@ -12,7 +12,10 @@ duree_films_pour_genre:
      path : /duree-films
      controller: App\Controller\GenreController::dureeFilmsPourUnGenre
 supprimer_genre_sans_film:
-     path: /supprimer-genre-sans-film/{id}
+     path: /supprimer-genre-sans-film/
      controller: App\Controller\GenreController::supprimerGenreSansFilm
+supprimer_genre:
+     path: /supprimer-genre/{id}
+     controller: App\Controller\GenreController::supprimerGenre
      requirements: 
         id: \d+

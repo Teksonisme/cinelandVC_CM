@@ -53,10 +53,11 @@ class ActeurController extends AbstractController
             );
         }
         $films = $acteur->getFilms();
-        $duree = 0; $genres = [];
+        $duree = 0;
+        $genres = [];
         foreach ($films as $film) {
             $duree += $film->getDuree();
-            if(!in_array($film->getGenre(),$genres)) $genres[] = $film->getGenre();
+            if (!in_array($film->getGenre(), $genres)) $genres[] = $film->getGenre();
         }
         return $this->render(
             'acteur/detail_acteur.html.twig',
@@ -197,5 +198,35 @@ class ActeurController extends AbstractController
     #       *   *   *
     public function deuxActeursDansMemeFilm()
     {
+    }
+    # * * * ACTION 20 * * * 
+    #       *   *   *
+    public function listeActeursFilmChrono()
+    {
+        $acteurs = $this->getDoctrine()->getRepository(Acteur::class)
+            ->findAll();
+        $filmsSorted = [];
+        foreach ($acteurs as $acteur) {
+            $tab_films = [];
+            $films = $acteur->getFilms();
+            foreach ($films as $film) {
+                $tab_films[] = $film;
+                usort($tab_films, function ($a, $b) {
+                    if ($b->getDateSortie() < $a->getDateSortie()) return 1;
+                    else return 0;
+                });
+            }
+            if (count($tab_films) > 0) {
+                $filmsSorted[$acteur->getNomPrenom()] = $tab_films;
+            }
+        }
+        return $this->render(
+            'acteur/liste_acteur_film_chrono.html.twig',
+            [
+                'films' => $filmsSorted,
+                'titre_liste' => "Liste des acteurs ",
+                'titre_form' => ""
+            ]
+        );
     }
 }

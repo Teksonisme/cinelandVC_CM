@@ -46,7 +46,14 @@ film_entre_deux_annees:
 film_avant_une_annee:
      path: /liste-avant-une-annee/
      controller: App\Controller\FilmController::avantUneAnnee
+# * * * Action 17 * * * 
+liste_film_commun:
+     path: /liste-commun/
+     controller: App\Controller\FilmController::listeFilmPourDeuxActeurs
 # * * * Action 25 * * * 
 rechercher_avec_partie_titre:
      path: /recherche
      controller: App\Controller\FilmController::rechercherAvecPartieTitre
+augmenter_age_mini:
+     path: /augmenter-age
+     controller: App\Controller\FilmController::augmenterAgeMiniSelonActeur

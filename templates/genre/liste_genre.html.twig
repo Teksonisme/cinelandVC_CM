@@ -1,12 +1,10 @@
+<h3>{{titre_liste}}</h3>
 
+<div id="list">
+	{% for genre in genres %}
+		<p>
 
-	<h3>{{titre_liste}}</h3>
-
-	<div id="list">
-		{% for genre in genres %}
-			<p>
-				{{genre.nom}}
-			</p>
-		{% endfor %}
-	</div>
-
+			{{genre.nom}}
+		</p>
+	{% endfor %}
+</div>

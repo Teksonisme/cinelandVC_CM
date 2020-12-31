@@ -1,0 +1,19 @@
+{% extends "first_layer.html.twig" %}
+{% block titre %}
+
+	{{ parent() }}
+{% endblock %}
+{% block contenu %}
+
+<h3>{{titre_liste}}</h3>
+<div id="list">
+
+	{% for key, tab in films %}
+		<p>
+			<h3>{{ key }}</h3>
+			{% for film in tab %}
+				{{ film.titre }}</br>
+			{{ film.dateSortie|date("d/m/Y",false) }}
+		</p>
+	</br>
+{% endfor %}</p>{% endfor %}</div>{% endblock %}

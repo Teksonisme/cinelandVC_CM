@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -62,7 +61,7 @@ class GenreController extends AbstractController
             $films = $acteur->getFilms();
             $tab = [];
             foreach ($films as $film) { // Vérifie si l'acteur a plus de 2 films avec le même genre
-                $genre = $film->getgenre();
+                $genre = $film->getGenre();
                 if (in_array($genre, $tab)) {
                     array_push($genres, $genre);
                 }
@@ -79,7 +78,7 @@ class GenreController extends AbstractController
                 [
                     'titre_form' => "Donner votre acteur",
                     'formulaire' => $form->createView(),
-                    'titre_liste' => "Liste des genre(s) présent dans au moins deux films :",
+                    'titre_liste' => "Liste des genres présents dans au moins deux films de l'acteur :",
                     'genres' => $genres
                 ]
             );
@@ -130,5 +129,33 @@ class GenreController extends AbstractController
                 'duree' => ''
             ]
         );
+    }
+    # * * * ACTION 24 * * * 
+    #       *   *   *
+    public function supprimerGenreSansFilm(){
+        $genres = $this->getDoctrine()->getRepository(Genre::class)
+        ->findAll();
+        $genresVide = [];
+        foreach($genres as $genre){
+            if(count($genre->getFilms()) == 0){
+                $genresVide[] = $genre;
+            }
+        }
+        if(count($genresVide) == 0) ;
+        return $this->render('genre/liste_genre_supprimer.html.twig', [
+            'genres' => $genresVide,
+            'titre_liste' => "Liste des genres pouvant être supprimés"
+        ]);
+    }
+    public function supprimerGenre($id){
+        $genre = $this->getDoctrine()->getRepository(Genre::class)->find($id);
+        if (!$genre) {
+            throw $this->createNotFoundException('Le genre[id=' . $id . '] n\'existe pas');
+        }
+        $eM = $this->getDoctrine()->getManager();
+        $eM->remove($genre);
+        $eM->flush();
+
+        return $this->redirectToRoute('supprimer_genre_sans_film');
     }
 }
