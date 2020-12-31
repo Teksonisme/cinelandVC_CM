@@ -19,7 +19,7 @@ class ActeurType extends AbstractType
                 DateType::class,
                 [
                     'years' => range(1900, 2020),
-                    'format' => 'dd-MM-yyyy'
+                    'format' => 'ddMMyyyy'
                 ]
             )
             ->add('nationalite', TextType::class);

@@ -52,11 +52,11 @@ class FilmController extends AbstractController
         $film = $this->getDoctrine()
             ->getRepository(Film::class)
             ->find($id);
-        if (!$film) {
+        if (!$film)
             throw $this->createNotFoundException(
                 'Film[id=' . $id . '] doesn\'t exist'
             );
-        }
+
         return $this->render(
             'film/detail_film.html.twig',
             [
@@ -76,9 +76,8 @@ class FilmController extends AbstractController
     public function modifierFilm($id)
     {
         $film = $this->getDoctrine()->getRepository(film::class)->find($id);
-        if (!$film) {
+        if (!$film)
             throw $this->createNotFoundException('Le film[id=' . $id . '] n\'existe pas');
-        }
         $form = $this->createForm(
             FilmType::class,
             $film,
@@ -91,6 +90,7 @@ class FilmController extends AbstractController
         return $this->render(
             'film/modifier_film.html.twig',
             [
+                'titre_form' => $film->getTitre(),
                 'formulaire' => $form->createView(),
                 'id' => $id
             ]
@@ -105,7 +105,7 @@ class FilmController extends AbstractController
             FilmType::class,
             $film,
             ['action' => $this->generateUrl(
-                'film/modifier2_film',
+                'modifier2_film',
                 ['id' => $film->getId()]
             )]
         )
@@ -122,8 +122,9 @@ class FilmController extends AbstractController
             return $this->redirect($url);
         }
         return $this->render(
-            'modifier_film.html.twig',
+            'film/modifier_film.html.twig',
             [
+                'titre_form' => $film->getTitre(),
                 'formulaire' => $form->createView(),
                 'id' => $id
             ]
@@ -140,7 +141,6 @@ class FilmController extends AbstractController
             ->add('submit', SubmitType::class, ['label' => 'Ajouter']);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $acteur = $this->getDoctrine()->getRepository(Acteur::class)
                 ->findByName($form->getData()->getNomPrenom());
             $eM = $this->getDoctrine()->getManager();
@@ -208,7 +208,7 @@ class FilmController extends AbstractController
             throw $this->createNotFoundException('Le film[id=' . $id . '] n\'existe pas');
         }
         $session->getFlashBag()
-            ->add('filmSupprime', 'Le film :' . $film->getTitre() . ' a été supprimé avec succès.');
+            ->add('filmSupprime', 'Le film "' . $film->getTitre() . '" a été supprimé avec succès.');
         $eM = $this->getDoctrine()->getManager();
         $eM->remove($film);
         $eM->flush();
@@ -382,7 +382,7 @@ class FilmController extends AbstractController
     {
         $acteur = new Acteur;
         $form = $this->createFormBuilder(null)
-            ->add('Acteur', ActeurFormType::class)
+            ->add('_', ActeurFormType::class)
             ->add('value', IntegerType::class, [
                 'data' => 1, 'required' => false, 'attr' => ['min' => 0]
             ])

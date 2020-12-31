@@ -3,7 +3,8 @@
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
-	{{ form(formulaire) }}
+	{{ include('form.html.twig') }}
+	<div id="list">
 	<p>
 		<a href="{{ path('ajouter_acteur', { 'id': id }) }}">
 			Ajouter un acteur à ce film</a>
@@ -12,5 +13,5 @@
 		<a href="{{ path('retirer_acteur', { 'id': id }) }}">
 			Retirer un acteur à ce film</a>
 	</p>
-	<a href="{{path('detail_film', { 'id': id }) }}">Abandonner</a>
+	<a href="{{path('detail_film', { 'id': id }) }}">Abandonner</a></div>
 {% endblock %}

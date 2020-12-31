@@ -3,18 +3,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Cineland</title>
+			{# <link rel="stylesheet" href="css/art.css"/>
+			<link rel="stylesheet" href="../css/art.css"/> #}
+			<link rel="stylesheet" href="{{ asset('build/css/art.css') }}"/>
+
 	</head>
 	<body>
-		<div id="navigation"></div>
-		<h1>
-			{% block titre %}
-				Cineland
-			{% endblock %}
-		</h1>
+		<div id="navigation">
+			<h1>
+				{% block titre %}
+					Cineland
+				{% endblock %}
+			</h1>
+		</div>
 		<div id="contenu"> {% block contenu %}{% endblock %}
 			</div>
-			<hr/>
-			<div id="pied_de_page"></div>
-			<a href="{{ path('menu')}}">Menu</a>
-	</body>
-</html>
+			<div id="menu">
+				<a href="{{ path('menu')}}">Menu</a>
+			</div>
+		</body>
+	</html>

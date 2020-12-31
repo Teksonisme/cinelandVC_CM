@@ -32,7 +32,7 @@ class Acteur
 
     /**
      * @ORM\Column(type="string", length=25, nullable=true)
-
+     * @Assert\Regex("/^[a-zA-Z \s]+$/")
      */
     private $nationalite;
 

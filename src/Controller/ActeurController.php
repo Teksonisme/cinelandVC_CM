@@ -31,7 +31,7 @@ class ActeurController extends AbstractController
             return $this->redirectToRoute('liste_acteur');
         }
         return $this->render(
-            'acteur/liste_acteur_ajouter.html.twig',
+            'acteur/liste_acteur_et_form.html.twig',
             array(
                 'acteurs' => $acteurs,
                 'formulaire' => $form->createView(),
@@ -85,13 +85,13 @@ class ActeurController extends AbstractController
             $acteur,
             ['action' => $this->generateUrl(
                 'modifier2_acteur',
-                array('id' => $acteur->getId())
+                ['id' => $acteur->getId()]
             )]
         );
         $form->add('submit', SubmitType::class, array('label' => 'Modifier'));
         return $this->render(
             'acteur/modifier_acteur.html.twig',
-            array('formulaire' => $form->createView())
+            ['formulaire' => $form->createView()]
         );
     }
     public function modifier2Acteur(Request $request, $id)
@@ -103,8 +103,8 @@ class ActeurController extends AbstractController
             ActeurType::class,
             $acteur,
             ['action' => $this->generateUrl(
-                'acteur/modifier2_acteur',
-                array('id' => $acteur->getId())
+                'modifier2_acteur',
+                ['id' => $acteur->getId()]
             )]
         );
         $form->add('submit', SubmitType::class, array('label' => 'Modifier'));
@@ -115,13 +115,13 @@ class ActeurController extends AbstractController
             $eM->flush();
             $url = $this->generateUrl(
                 'detail_acteur',
-                array('id' => $acteur->getId())
+                ['id' => $acteur->getId()]
             );
             return $this->redirect($url);
         }
         return $this->render(
-            'modifier_acteur.html.twig',
-            array('formulaire' => $form->createView())
+            'acteur/modifier_acteur.html.twig',
+            ['formulaire' => $form->createView()]
         );
     }
     # * * * ACTION 7 * * * 
@@ -193,11 +193,6 @@ class ActeurController extends AbstractController
                 'titre_form' => ""
             ]
         );
-    }
-    # * * * ACTION 17 * * * 
-    #       *   *   *
-    public function deuxActeursDansMemeFilm()
-    {
     }
     # * * * ACTION 20 * * * 
     #       *   *   *

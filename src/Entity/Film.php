@@ -37,11 +37,16 @@ class Film
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Assert\Range(
+     * min = 0,
+     * max = 20,
+     * notInRangeMessage = "La note doit être comprise entre {{ min }} et {{ max }}.")
      */
     private $note;
 
     /**
      * @ORM\Column(type="smallint")
+     * @Assert\PositiveOrZero
      */
     private $ageMinimal;
 
@@ -64,7 +69,7 @@ class Film
 
     public function __toString()
     {
-        return $this->getTitre()."";
+        return $this->getTitre() . "";
     }
 
     public function getId(): ?int
@@ -167,6 +172,4 @@ class Film
 
         return $this;
     }
-
-    
 }

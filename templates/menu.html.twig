@@ -4,77 +4,82 @@
 {% endblock %}
 {% block contenu %}
 	{# Films #}
-	<h2>
-		Film
-	</h2>
-	<p>
-		<a href="{{ path('liste_film') }}">
-			Liste des films</a>
-	</p>
+	<div id='film-block'>
+		<h2>
+			Film
+		</h2>
+		<p>
+			<a href="{{ path('liste_film') }}">
+				Liste des films</a>
+		</p>
 
-	<p>
-		<a href="{{ path('film_entre_deux_annees') }}">
-			Film entre 2 années</a>
-	</p>
-	<p>
-		<a href="{{ path('film_avant_une_annee') }}">
-			Film avant une année</a>
-	</p>
-	<p>
-		<a href="{{ path('rechercher_avec_partie_titre') }}">
-			Rechercher un film avec une partie de son titre</a>
-	</p>
-	<p>
-		<a href="{{ path('augmenter_age_mini') }}">
-			Augmenter l'âge minimal de tous les films d'un acteur</a>
-	</p>
-	<p>
-		<a href="{{ path('liste_film_commun') }}">
-			Liste films en commun pour deux acteur</a>
-	</p>
+		<p>
+			<a href="{{ path('film_entre_deux_annees') }}">
+				Film entre 2 années</a>
+		</p>
+		<p>
+			<a href="{{ path('film_avant_une_annee') }}">
+				Film avant une année</a>
+		</p>
+		<p>
+			<a href="{{ path('rechercher_avec_partie_titre') }}">
+				Rechercher un film avec une partie de son titre</a>
+		</p>
+		<p>
+			<a href="{{ path('augmenter_age_mini') }}">
+				Augmenter l'âge minimal de tous les films d'un acteur</a>
+		</p>
+		<p>
+			<a href="{{ path('liste_film_commun') }}">
+				Liste films en commun pour deux acteur</a>
+		</p>
+	</div>
 	{# Acteurs #}
-	<h2>
-		Acteur
-	</h2>
-	<p>
-		<a href="{{ path('liste_acteur') }}">
-			Liste des acteurs</a>
-	</p>
-	<p>
-		<a href="{{ path('liste_acteurs_selon_film') }}">
-			Acteur selon un film</a>
-	</p>
-	<p>
-		<a href="{{ path('liste_acteurs_film_chrono') }}">
-			Liste des acteurs et de leurs films rangés chronologiquement</a>
-	</p>
-	<p>
-		<a href="{{ path('liste_acteurs_trois_films') }}">
-			Acteur(s) ayant trois films</a>
-	</p>
+	<div id='acteur-block'>
+		<h2>
+			Acteur
+		</h2>
+		<p>
+			<a href="{{ path('liste_acteur') }}">
+				Liste des acteurs</a>
+		</p>
+		<p>
+			<a href="{{ path('liste_acteurs_selon_film') }}">
+				Acteur selon un film</a>
+		</p>
+		<p>
+			<a href="{{ path('liste_acteurs_film_chrono') }}">
+				Liste des acteurs et de leurs films rangés chronologiquement</a>
+		</p>
+		<p>
+			<a href="{{ path('liste_acteurs_trois_films') }}">
+				Acteur(s) ayant trois films</a>
+		</p>
+	</div>
 	{# Genres #}
-	<h2>
-		Genre
-	</h2>
+	<div id='genre-block'>
+		<h2>
+			Genre
+		</h2>
+		<p>
+			<a href="{{ path('liste_genre') }}">
+				Liste des genres</a>
+		</p>
+		<p>
+			<a href="{{ path('liste_genres_acteur') }}">
+				Genres pour un acteur donnée ayant deux films différents</a>
+		</p>
+		<p>
+			<a href="{{ path('duree_films_pour_genre') }}">
+				Durée moyenne des films d'un genre</a>
+		</p>
+		<p>
+			<a href="{{ path('supprimer_genre_sans_film') }}">
+				Supprimer les genres sans film</a>
+		</p>
+	</div>
+	{# Flashbags #}
 	<p>
-		<a href="{{ path('liste_genre') }}">
-			Liste des genres</a>
-	</p>
-	<p>
-		<a href="{{ path('liste_genres_acteur') }}">
-			Genres pour un acteur donnée ayant deux films différents</a>
-	</p>
-	<p>
-		<a href="{{ path('duree_films_pour_genre') }}">
-			Durée des films d'un genre</a>
-	</p>
-	<p>
-		<a href="{{ path('supprimer_genre_sans_film') }}">
-			Supprimer les genres sans film</a>
-	</p>
-	<p>
-
-		{# Flashbags #}
 		<ul>
 			{% for mesg in app.session.flashbag.get('pageNotFound') %}
 				<li>{{ mesg }}</li>

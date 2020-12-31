@@ -1,0 +1,69 @@
+body {
+  background-color: lightgray;
+}
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+#genre-block,
+#film-block,
+#acteur-block {
+  position: absolute;
+  border: black;
+  border-style: solid;
+  text-align: center;
+  width: 70%;
+  margin-left: 12.5%;
+  padding: 0px 5px;
+}
+#genre-block {
+  top: 40%;
+}
+#film-block {
+  top: 12%;
+}
+#acteur-block {
+  top: 61.5%;
+}
+#navigation {
+  border-style: solid;
+  text-align: center;
+}
+#menu {
+  position: absolute;
+  top: 2.3%;
+  left: 6%;
+  font-size: 38px;
+  border-style: solid;
+  border-radius: 10%;
+}
+#titre_form {
+  position: absolute;
+  border-style: solid;
+  top: 12%;
+  left: 10%;
+  width: 18.5%;
+  height: 4%;
+  text-align:center;
+}
+#form {
+  position:absolute;
+
+  top:17%;
+  left:10%;
+  width:18.5%;
+  height:21%;
+}
+#titre_liste{
+  position:absolute;
+  top:11%;
+  left:39%;
+  font-size:35px;
+}
+#list{
+  position:absolute;
+  top:15%;
+  left:40%;
+  font-size:20px;
+}
