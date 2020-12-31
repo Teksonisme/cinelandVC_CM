@@ -4,10 +4,7 @@
 {% endblock %}
 {% block contenu %}
 
-	<h3>{{ titre_form }}</h3>
-
-	{{ form_start(formulaire) }}
-	{{ form_end(formulaire) }}
+	{{ include('form.html.twig') }}
 	{{ include('genre/liste_genre.html.twig') }}
 
 {% endblock %}

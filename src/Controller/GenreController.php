@@ -109,15 +109,18 @@ class GenreController extends AbstractController
             $genre = $this->getDoctrine()->getRepository(Genre::class)
                 ->findbyName($genre->getNom());
             $films = $genre->getFilms();
+            $i = 0;
             foreach ($films as $film) {
                 $duree += $film->getDuree();
+                $i++;
             }
+            if ($duree < 0) $duree /= $i;
             return $this->render(
                 'genre/duree_films.html.twig',
                 [
                     'titre_form' => "Donner votre genre : ",
                     'formulaire' => $form->createView(),
-                    'duree' => $duree.' minutes'
+                    'duree' => $duree . ' minutes'
                 ]
             );
         }
@@ -132,22 +135,24 @@ class GenreController extends AbstractController
     }
     # * * * ACTION 24 * * * 
     #       *   *   *
-    public function supprimerGenreSansFilm(){
+    public function supprimerGenreSansFilm()
+    {
         $genres = $this->getDoctrine()->getRepository(Genre::class)
-        ->findAll();
+            ->findAll();
         $genresVide = [];
-        foreach($genres as $genre){
-            if(count($genre->getFilms()) == 0){
+        foreach ($genres as $genre) {
+            if (count($genre->getFilms()) == 0) {
                 $genresVide[] = $genre;
             }
         }
-        if(count($genresVide) == 0) ;
+        if (count($genresVide) == 0);
         return $this->render('genre/liste_genre_supprimer.html.twig', [
             'genres' => $genresVide,
             'titre_liste' => "Liste des genres pouvant être supprimés"
         ]);
     }
-    public function supprimerGenre($id){
+    public function supprimerGenre($id)
+    {
         $genre = $this->getDoctrine()->getRepository(Genre::class)->find($id);
         if (!$genre) {
             throw $this->createNotFoundException('Le genre[id=' . $id . '] n\'existe pas');

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c81d1652a8ebceaa903556a8ca2ca43",
+    "content-hash": "aab8e13e6ab6edd49f0416d7f2b60eea",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1893,16 +1893,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "65fe7b49868378319b82da3035fb30801b931c47"
+                "reference": "5dfc7825f3bfe9bb74b23d8b8ce0e0894e32b544"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/65fe7b49868378319b82da3035fb30801b931c47",
-                "reference": "65fe7b49868378319b82da3035fb30801b931c47",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/5dfc7825f3bfe9bb74b23d8b8ce0e0894e32b544",
+                "reference": "5dfc7825f3bfe9bb74b23d8b8ce0e0894e32b544",
                 "shasum": ""
             },
             "require": {
@@ -1941,7 +1941,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2020-10-28T20:42:29+00:00"
+            "time": "2020-12-10T16:34:26+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -3617,6 +3617,59 @@
             "time": "2020-10-31T22:44:29+00:00"
         },
         {
+            "name": "symfony/proxy-manager-bridge",
+            "version": "v4.4.18",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/proxy-manager-bridge.git",
+                "reference": "373d72703ef24b6a22c8592f53c7f0e333d9f038"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/proxy-manager-bridge/zipball/373d72703ef24b6a22c8592f53c7f0e333d9f038",
+                "reference": "373d72703ef24b6a22c8592f53c7f0e333d9f038",
+                "shasum": ""
+            },
+            "require": {
+                "composer/package-versions-deprecated": "^1.8",
+                "ocramius/proxy-manager": "~2.1",
+                "php": ">=7.1.3",
+                "symfony/dependency-injection": "^4.0|^5.0"
+            },
+            "conflict": {
+                "zendframework/zend-eventmanager": "2.6.0"
+            },
+            "require-dev": {
+                "symfony/config": "^3.4|^4.0|^5.0"
+            },
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bridge\\ProxyManager\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ProxyManager Bridge",
+            "homepage": "https://symfony.com",
+            "time": "2020-11-12T13:19:35+00:00"
+        },
+        {
             "name": "symfony/routing",
             "version": "v4.4.17",
             "source": {
@@ -4078,16 +4131,16 @@
         },
         {
             "name": "symfony/twig-bundle",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bundle.git",
-                "reference": "9acacb72d30ee1ea0331762906a129a66a9d9883"
+                "reference": "10d55db1fd9e506c6f074c3e9d566c25b407877a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/9acacb72d30ee1ea0331762906a129a66a9d9883",
-                "reference": "9acacb72d30ee1ea0331762906a129a66a9d9883",
+                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/10d55db1fd9e506c6f074c3e9d566c25b407877a",
+                "reference": "10d55db1fd9e506c6f074c3e9d566c25b407877a",
                 "shasum": ""
             },
             "require": {
@@ -4144,20 +4197,20 @@
             ],
             "description": "Symfony TwigBundle",
             "homepage": "https://symfony.com",
-            "time": "2020-10-24T11:50:19+00:00"
+            "time": "2020-12-18T07:41:31+00:00"
         },
         {
             "name": "symfony/validator",
-            "version": "v4.4.17",
+            "version": "v4.4.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "aa3519160f5b09043888f92aae4fd78cc41a85bf"
+                "reference": "f212e0520097c3a283358a83fd202a66d85c21ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/aa3519160f5b09043888f92aae4fd78cc41a85bf",
-                "reference": "aa3519160f5b09043888f92aae4fd78cc41a85bf",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/f212e0520097c3a283358a83fd202a66d85c21ee",
+                "reference": "f212e0520097c3a283358a83fd202a66d85c21ee",
                 "shasum": ""
             },
             "require": {
@@ -4232,7 +4285,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2020-11-27T16:19:44+00:00"
+            "time": "2020-12-17T16:57:38+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -4887,16 +4940,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.25.0",
+            "version": "v1.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "6d2da12632f5c8b9aa7b159f0bb46f245289434a"
+                "reference": "0f1d3ed2584349dc8700d7908e8a92b3742b1c99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/6d2da12632f5c8b9aa7b159f0bb46f245289434a",
-                "reference": "6d2da12632f5c8b9aa7b159f0bb46f245289434a",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/0f1d3ed2584349dc8700d7908e8a92b3742b1c99",
+                "reference": "0f1d3ed2584349dc8700d7908e8a92b3742b1c99",
                 "shasum": ""
             },
             "require": {
@@ -4953,7 +5006,7 @@
                 "scaffold",
                 "scaffolding"
             ],
-            "time": "2020-12-07T14:47:57+00:00"
+            "time": "2020-12-18T17:08:39+00:00"
         },
         {
             "name": "symfony/monolog-bridge",

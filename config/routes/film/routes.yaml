@@ -20,7 +20,7 @@ modifier_film:
           id: \d+
 modifier2_film: 
      path: /modifier2/{id}
-     controller: App\Controller\FilmController::modifierFilm
+     controller: App\Controller\FilmController::modifier2Film
      requirements:
           id: \d+ 
 ajouter_acteur:

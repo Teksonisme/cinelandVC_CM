@@ -3,6 +3,5 @@
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
-	<h3>{{ titre_form }}</h3>
-	{{ form(formulaire) }}
+	{{ include('form.html.twig') }}
 {% endblock %}

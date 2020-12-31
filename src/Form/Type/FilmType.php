@@ -28,19 +28,13 @@ class FilmType extends AbstractType
                     'format' => 'dd-MM-yyyy'
                 ]
             )
-            ->add('note', IntegerType::class)
             ->add('ageMinimal', IntegerType::class)
+            ->add('note', IntegerType::class)
             ->add(
                 'genre',
                 EntityType::class,
                 ['class' => Genre::class]
             )
-            // # IL FAUT DONNER UN CHOIX MULTIPLE
-            // ->add(
-            //     'acteurs',
-            //     CollectionType::class,
-            //     ['entry_type' => ActeurFormType::class]
-            // );
             ;
     }
     public function configureOptions(OptionsResolver $resolver)

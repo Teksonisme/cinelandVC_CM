@@ -4,11 +4,8 @@
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
-	<h3>{{ titre_form }}</h3>
-	<div id="form">
-		{{ form(formulaire) }}
-		</div>
-		<h3>{{titre_liste}}</h3>
+	{{ include('form.html.twig') }}
+		<div id="titre_liste">{{titre_liste}}</div>
 		<div id="list">
 			{% for film in films %}
 				<p>

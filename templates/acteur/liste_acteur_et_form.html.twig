@@ -5,12 +5,9 @@
 {% endblock %}
 {% block contenu %}
 
-	<h3>{{ titre_form }}</h3>
-	<div id="form">
-		{{ form(formulaire) }}
-		</div>
+	{{ include('form.html.twig') }}
 
-		<h3>{{titre_liste}}</h3>
+		<div id="titre_liste">{{titre_liste}}</div>
 		<div id="list">
 			{% for acteur in acteurs %}
 				<p>
