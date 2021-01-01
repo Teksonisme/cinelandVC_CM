@@ -26,6 +26,11 @@ a {
 #acteur-block {
   top: 61.5%;
 }
+#detail-block{
+  position:absolute;
+  top:50%;
+  border: black;
+}
 #navigation {
   border-style: solid;
   text-align: center;
@@ -66,4 +71,8 @@ a {
   top:15%;
   left:40%;
   font-size:20px;
+}
+#detailblock{
+  position:absolute;
+  top:50%;
 }

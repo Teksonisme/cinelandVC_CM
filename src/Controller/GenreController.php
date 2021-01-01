@@ -78,7 +78,7 @@ class GenreController extends AbstractController
                 [
                     'titre_form' => "Donner votre acteur",
                     'formulaire' => $form->createView(),
-                    'titre_liste' => "Liste des genres présents dans au moins deux films de l'acteur :",
+                    'titre_liste' => "Liste des genres :",
                     'genres' => $genres
                 ]
             );
@@ -114,7 +114,7 @@ class GenreController extends AbstractController
                 $duree += $film->getDuree();
                 $i++;
             }
-            if ($duree < 0) $duree /= $i;
+            if ($duree > 0) $duree /= $i;
             return $this->render(
                 'genre/duree_films.html.twig',
                 [

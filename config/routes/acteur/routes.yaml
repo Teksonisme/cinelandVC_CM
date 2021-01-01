@@ -1,15 +1,17 @@
 # index:
 #     path: /
 #     controller: App\Controller\ActeurController::accueil
-
+# * * * Action 3 et 5* * 
 liste_acteur:
      path: /liste
      controller: App\Controller\ActeurController::listeActeur
+# * * * Action 4 * * 
 detail_acteur:
      path: /detail/{id}
      controller: App\Controller\ActeurController::detailActeur
      requirements:
           id: \d+
+# * * * Action 6 * * 
 modifier_acteur:
      path: /modifier/{id}
      controller: App\Controller\ActeurController::modifierActeur
@@ -20,54 +22,21 @@ modifier2_acteur:
      controller: App\Controller\ActeurController::modifier2Acteur
      requirements:
           id: \d+         
+# * * * Action 12 * * 
 supprimer_acteur:
      path: /supprimer/{id}
      controller: App\Controller\ActeurController::supprimerActeur
      requirements:
           id: \d+ 
+# * * * Action 15 * * 
 liste_acteurs_selon_film:
      path: /acteurs-selon-film/
      controller: App\Controller\ActeurController::acteurSelonFilm
+# * * * Action 16 * * 
 liste_acteurs_trois_films:
      path: /acteurs-trois-films/
      controller: App\Controller\ActeurController::acteurAvecTroisFilms
+# * * * Action 20 * * 
 liste_acteurs_film_chrono:
      path: /acteurs-films-chrono/
      controller: App\Controller\ActeurController::listeActeursFilmChrono
-
-
-
-
-liste_acteur_3film:
-     path: /liste-acteur-3film/
-     controller: App\Controller\ActeurController::listeActeur3Film
-liste_film_2acteur:
-     path: /liste-film/{id}-{id2}
-     controller: App\Controller\ActeurController::listeFilm2Acteur
-     requirements: 
-        id: \d+
-        id2: \d+
-liste_acteur_genre_2film:
-     path: /liste-film/{id}
-     controller: App\Controller\ActeurController::listeActeurGenre2Film
-     requirements: 
-        id: \d+
-liste_film_duree_acteur: #On donne ici l'acteur pour trouver la durée de ses films
-     path: /liste-duree-film/{id}
-     controller: App\Controller\ActeurController::listeDureeFilm
-     requirements: 
-        id: \d+
-liste_film_acteur_chronologique:
-     path: /liste-film-chronologique/
-     controller: App\Controller\ActeurController::listeFilmChronologique
-augmenter_age_minimal_1acteur:
-     path: /ajouter-age-minimal/{id}
-     controller: App\Controller\ActeurController::ajouterAgeMini
-     requirements: 
-        id: \d+
-augmenter_age_minimal_1acteur_choisi:
-     path: /ajouter-age-minimal/{id}-{nombre}
-     controller: App\Controller\ActeurController::ajouterAgeMiniChoisi
-     requirements: 
-        id: \d+
-        nombre: \d+

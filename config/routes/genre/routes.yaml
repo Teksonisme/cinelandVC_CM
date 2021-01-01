@@ -1,16 +1,19 @@
 # index:
 #     path: /
 #     controller: App\Controller\GenreController::accueil
-
+# * * * Action 1 * * 
 liste_genre:
      path: /liste
      controller: App\Controller\GenreController::listeGenre
+# * * * Action 18 * * 
 liste_genres_acteur:
      path: /liste-deux-films
      controller: App\Controller\GenreController::listeGenreActeurDeuxFilms
+# * * * Action 22 * * 
 duree_films_pour_genre:
      path : /duree-films
      controller: App\Controller\GenreController::dureeFilmsPourUnGenre
+# * * * Action 24 * * 
 supprimer_genre_sans_film:
      path: /supprimer-genre-sans-film/
      controller: App\Controller\GenreController::supprimerGenreSansFilm

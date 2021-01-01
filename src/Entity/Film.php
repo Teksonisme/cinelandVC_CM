@@ -26,7 +26,7 @@ class Film
     private $titre;
 
     /**
-     * @ORM\Column(type="smallint", unique=true)
+     * @ORM\Column(type="smallint")
      */
     private $duree;
 

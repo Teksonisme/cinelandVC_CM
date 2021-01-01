@@ -3,36 +3,37 @@
 	{{ parent() }}
 {% endblock %}
 {% block contenu %}
-
-	<p>Prénom/Nom :
-		{{nomPrenom}}
-	</p>
-	<p>Date de naissance :
-		{{date_naissance}}
-	</p>
-	<p>Nationalité :
-		{{nationalite}}
-	</p>
-	<h3>Liste des genres de l'acteur :</h3>
-	(
-	{% for genre in genres %}
-		"{{genre.nom}}"
-	{% endfor %})
+	<div id="detail-block">
+		<p>Prénom/Nom :
+			{{nomPrenom}}
+		</p>
+		<p>Date de naissance :
+			{{date_naissance}}
+		</p>
+		<p>Nationalité :
+			{{nationalite}}
+		</p>
+	</div>
+	<div id="list1">
+		<h3>Liste des genres de l'acteur :</h3>
+		(
+		{% for genre in genres %}
+			"{{genre.nom}}"
+		{% endfor %})
+	</div>
 </br>
-<h3>Liste des films de l'acteur</h3>
-(durée totale :
-{{duree_films}}
-minutes):</br>
-
+<div id="list2">
+	<h3>Liste des films de l'acteur</h3>
+	(durée totale : {{duree_films}} minutes):</br>
 {% for film in films %}
-<p>
-	<i>
-		<a href="{{ path('detail_film', { 'id' : film.id }) }}">{{film.titre}}</a>
-	</i>
-</p>
+	<p>
+		<i>
+			<a href="{{ path('detail_film', { 'id' : film.id }) }}">{{film.titre}}</a>
+		</i>
+	</p>
 {% endfor %}
-<a href="{{ path('modifier_acteur', { 'id': acteur.id }) }}">
-Modifier</a>
-<a href="{{ path('supprimer_acteur', { 'id': acteur.id }) }}">
-Supprimer</a>
+</div>
+
+<a href="{{ path('modifier_acteur', { 'id': acteur.id }) }}">Modifier</a>
+<a href="{{ path('supprimer_acteur', { 'id': acteur.id }) }}">Supprimer</a>
 {% endblock %}

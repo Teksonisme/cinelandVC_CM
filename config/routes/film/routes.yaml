@@ -54,6 +54,7 @@ liste_film_commun:
 rechercher_avec_partie_titre:
      path: /recherche
      controller: App\Controller\FilmController::rechercherAvecPartieTitre
+# * * * Action 26 * * * 
 augmenter_age_mini:
      path: /augmenter-age
      controller: App\Controller\FilmController::augmenterAgeMiniSelonActeur

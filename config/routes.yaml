@@ -13,6 +13,12 @@ film:
 genre: 
     resource: routes/genre/routes.yaml
     prefix: /genre
+init:
+    path: /init
+    controller: App\Controller\CinelandController::init
+init2:
+    path: /cineland/init
+    controller: App\Controller\CinelandController::init
 pageNotFound:
     path:  /{pathing}
     controller: App\Controller\CinelandController::pageNotFound
